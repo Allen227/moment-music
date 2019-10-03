@@ -11,6 +11,9 @@
 # production
 /build
 
+# api
+/NeteaseCloudMusicApi/node_modules
+
 # misc
 .DS_Store
 .env.local
