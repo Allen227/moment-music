@@ -1,9 +1,20 @@
 .app-header {
   display: flex;
-  padding-left: 24px;
-  font-size: 18px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
   height: 60px;
   line-height: 60px;
   background: #24292e;
   color: white;
+  .app-title {
+    font-size: 18px;
+  }
+  .menu-list {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    li {
+    }
+  }
 }

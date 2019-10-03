@@ -4,11 +4,12 @@ import AppHeader from '../components/app-header';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className="app">
       <AppHeader>
-        <h1>SEA MUSIC</h1>
+        <h1 className="app-title">SEA MUSIC</h1>
         <ul className="menu-list">
           <li>推荐</li>
+          <li>排行榜</li>
         </ul>
       </AppHeader>
     </div>
