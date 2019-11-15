@@ -6,14 +6,13 @@ interface actionInterfact {
 };
 
 const fetchRecommend = (state = {}, action: actionInterfact) => {
-  switch (action.type) {
+  console.log(123)
+  return 123
+  /* switch (action.type) {
     case actionTypes.GET_RECOMMEND_SONDS:
-      return action.data;
-    default:
-      return state
-  }
+      return state;
+  } */
 };
-
 export {
   fetchRecommend
 };

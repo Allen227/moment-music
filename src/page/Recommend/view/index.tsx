@@ -1,9 +1,11 @@
 import * as React from 'react';
 import AppHeader from '../../../component/common/app-header';
 import LayoutMain from '../../../layout/layout-main';
+import store from '../../../store';
 
 class Recommend extends React.Component {
   render () {
+    store.dispatch('fetchRecommend')
     return (
       <div className="recommend">
         <AppHeader></AppHeader>
