@@ -1,17 +1,17 @@
 import * as actionTypes from '../../const';
 
-interface actionInterfact {
+interface recommendInterface {
   type: string,
   data: object
 };
 
-const fetchRecommend = (state = {}, action: actionInterfact) => {
-  console.log(123)
-  return 123
-  /* switch (action.type) {
+const fetchRecommend = (state = {}, action: recommendInterface) => {
+  switch (action.type) {
     case actionTypes.GET_RECOMMEND_SONDS:
       return state;
-  } */
+    default:
+      return state;
+  }
 };
 export {
   fetchRecommend
