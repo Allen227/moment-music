@@ -1,4 +1,4 @@
 import {fetchRecommend} from './recommend';
-export default {
+export {
   fetchRecommend
 }
