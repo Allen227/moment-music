@@ -5,7 +5,6 @@ import store from '../../../store';
 
 class Recommend extends React.Component {
   render () {
-    store.dispatch('fetchRecommend')
     return (
       <div className="recommend">
         <AppHeader></AppHeader>
