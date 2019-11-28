@@ -6,7 +6,7 @@ export interface recommendInterface {
 }
 
 // 获取推荐歌单
-const fetchRecommend = (data: object): recommendInterface => {
+const fetchRemmendList = (data: object): recommendInterface => {
   return {
     type: actionTypes.GET_RECOMMEND_SONDS,
     data
@@ -14,5 +14,5 @@ const fetchRecommend = (data: object): recommendInterface => {
 };
 
 export {
-  fetchRecommend
+  fetchRemmendList
 }

@@ -1,23 +1,15 @@
 import {connect} from 'react-redux';
-import {GET_RECOMMEND_SONDS} from '../../const'
-import Recommend from '../../page/Recommend/view/index';
-import {fetchRecommend} from '../../store/actions'
+import RecommendList from '../../page/Recommend/view/RecommendList';
+import * as RecommendAction from '../../store/actions/recommend'
 import {bindActionCreators} from 'redux';
-
-export interface fetchRecommendInterface {
-  type: string,
-  data: object
+interface actionType {
+  recommendActions: any
 }
-
-const mapStateToProps = (state: object) => {
-  return state;
-};
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-      musicInfoActions: () => {
-        dispatch(GET_RECOMMEND_SONDS)
-      }
+const mapDispatchToProps = (dispatch: any): object => {
+  let actions: actionType = {
+      recommendActions: bindActionCreators<any, any>(RecommendAction, dispatch)
   }
+  return actions
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Recommend);
+export default connect(mapDispatchToProps)(RecommendList);
