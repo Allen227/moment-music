@@ -1,15 +1,18 @@
 import {connect} from 'react-redux';
-import RecommendList from '../../page/Recommend/view/RecommendList';
-import * as RecommendAction from '../../store/actions/recommend'
-import {bindActionCreators} from 'redux';
-interface actionType {
-  recommendActions: any
-}
-const mapDispatchToProps = (dispatch: any): object => {
-  let actions: actionType = {
-      recommendActions: bindActionCreators<any, any>(RecommendAction, dispatch)
+import RecommendList from '../../page/Recommend/view/index';
+import * as actions from '../../store/actions/recommend';
+import {recommendStore} from '../../types/index';
+import {Dispatch} from 'redux';
+export function mapStateToProps(state: recommendStore) {
+  return {
+    recommendList: state && state.recommendList
   }
-  return actions
+}
+
+export function mapDispatchToProps(dispatch: Dispatch<actions.recommendListType>) {
+  return {
+    fetchRemmendList: () => dispatch(actions.fetchRemmendList())
+  }
 };
 
-export default connect(mapDispatchToProps)(RecommendList);
+export default connect(mapStateToProps, mapDispatchToProps)(RecommendList);

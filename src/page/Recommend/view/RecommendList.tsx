@@ -13,7 +13,8 @@ export default class Recommend extends React.Component {
   }
   render () {
     return (
-      <div className="music-list"></div>
+      <div className="music-list">
+      </div>
     )
   }
 };

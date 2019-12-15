@@ -1,15 +1,13 @@
-import * as actionTypes from '../../const'
+import * as actionTypes from '../../const';
 
-export interface recommendInterface {
-  type: string,
-  data: object
+export interface recommendListType {
+  type: actionTypes.GET_RECOMMEND_SONDS
 }
 
 // 获取推荐歌单
-const fetchRemmendList = (data: object): recommendInterface => {
+const fetchRemmendList = (): recommendListType => {
   return {
-    type: actionTypes.GET_RECOMMEND_SONDS,
-    data
+    type: actionTypes.GET_RECOMMEND_SONDS
   }
 };
 

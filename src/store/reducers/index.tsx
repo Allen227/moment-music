@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {fetchRecommend} from './recommend';
-export default combineReducers({
+const test = combineReducers({
   fetchRecommend
 });
+export default test;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Recommend from '../page/Recommend/view';
+import Recommend from '../container/recommend/index';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 class Router extends React.Component {

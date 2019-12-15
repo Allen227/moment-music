@@ -1,6 +1,6 @@
-import {createStore} from 'redux'
-import rootReducer from './reducers'
+import {createStore} from 'redux';
+import rootReducer from './reducers/index';
 
-export default createStore(
+export default createStore (
   rootReducer
 )
