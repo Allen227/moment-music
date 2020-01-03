@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {fetchRecommend} from './recommend';
+import {recommendList} from './recommend';
 export default combineReducers({
-  fetchRecommend
+  recommendList
 });

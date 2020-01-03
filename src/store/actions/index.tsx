@@ -1,4 +1,4 @@
-import {fetchRemmendList} from './recommend';
+import {fetchRecommend} from './recommend';
 export {
-  fetchRemmendList
+  fetchRecommend
 };

@@ -1,17 +1,14 @@
 import * as actionTypes from '../../const';
 import {recommendListType} from '../actions/recommend';
-import {recommendStore} from '../../types/index';
-import service from '../../server/api';
 
-let initialRecommend = {};
 
-const fetchRecommend = (state: object | undefined, action: recommendListType): object => {
+const recommendList = (state: object = {}, action: recommendListType): object => {
   switch (action.type) {
-    case actionTypes.FETCH_RECOMMEND_SOUNDS.START:
-      return {...state, recommendList: service.recommend_list()};
+    case actionTypes.FETCH_RECOMMEND_SOUNDS.SUCCESS:
+      return Object.assign({}, state, action.payload);
   }
-  return initialRecommend;
+  return state;
 };
 export {
-  fetchRecommend
+  recommendList
 };
