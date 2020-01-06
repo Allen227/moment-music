@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import RecommendList from '../../page/recommend/index';
+import Home from '../../page/home/index';
 import * as actions from '../../store/actions/recommend';
 export function mapStateToProps(state: object) {
   return state;
@@ -11,4 +11,4 @@ export function mapDispatchToProps(dispatch: any) {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecommendList);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

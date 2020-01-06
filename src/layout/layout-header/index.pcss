@@ -29,7 +29,7 @@
       justify-content: space-between;
       list-style: none;
       cursor: pointer;
-      &__item {
+      .menu-item {
         padding: 0 24px;
         margin-right: 12px;
         text-decoration: none;
@@ -37,12 +37,12 @@
         &:hover {
           color: #00BFFF;
         }
-        &--active {
-          background: #00BFFF;
+      }
+      .active {
+        background: #00BFFF;
+        color: white;
+        &:hover {
           color: white;
-          &:hover {
-            color: white;
-          }
         }
       }
     }
