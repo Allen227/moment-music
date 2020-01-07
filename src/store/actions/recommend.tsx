@@ -20,7 +20,7 @@ const fetchRecommendError= (payload: object): recommendListType => ({
 
 const fetchRecommend = (): ThunkAction<void, null, null, Action<string>> => {
   return dispatch => {
-    server.fetch_recommend_list().then(res => {
+    server.fetch_category_list().then(res => {
       dispatch(fetchRecommendSuccess(res));
     }).catch(err => {
       dispatch(fetchRecommendError(err));

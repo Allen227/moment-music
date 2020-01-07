@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.pcss';
+import './style.pcss';
 
 class AppHeader extends React.Component {
   render () {

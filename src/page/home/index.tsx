@@ -13,12 +13,17 @@ export default class Recommend extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
+  componentDidMount() {
+    this.props.fetchRemmendList()
+   }
   render () {
     return (
       <div className="recommend">
         <AppHeader></AppHeader>
         <LayoutMain>
-          <h1>Rank page</h1>
+          <ul>
+            <li></li>
+          </ul>
         </LayoutMain>
       </div>
     )

@@ -1,12 +1,15 @@
 import * as React from 'react';
 import LayoutHeader from '../../../layout/layout-header';
 import {NavLink} from 'react-router-dom';
+import './style.pcss';
 
 class AppHeader extends React.Component {
   render () {
     return (
       <LayoutHeader>
-        <h1 className="app-title">MOMENT</h1>
+        <NavLink to="/">
+          <h1 className="app-title">MOMENT</h1>
+        </NavLink>
         <ul className="menu-list">
           <NavLink to="/recommend" className="menu-item" activeClassName="active">
             <li>推荐</li>
