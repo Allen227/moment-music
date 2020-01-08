@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LayoutHeader from '../../../layout/layout-header';
+import LayoutHeader from '../../../layout/header';
 import {NavLink} from 'react-router-dom';
 import './style.pcss';
 

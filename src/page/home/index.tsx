@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AppHeader from '../../component/common/app-header';
-import LayoutMain from '../../layout/layout-main';
+import LayoutMain from '../../layout/main';
 import {recommendListType} from '../../types';
 
 
