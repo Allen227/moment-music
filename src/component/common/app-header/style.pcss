@@ -1,27 +1,50 @@
-
-.app-title {
-  cursor: pointer;
-  font-size: 18px;
-}
-.menu-list {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  cursor: pointer;
-  .menu-item {
-    padding: 0 24px;
-    margin-right: 12px;
-    text-decoration: none;
-    color: var(--mainFontColor);
-    &:hover {
-      color: #00BFFF;
-    }
+.app-header {
+  position: relative;
+  .header-bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--mainColor);
   }
-  .active {
-    background: #00BFFF;
-    color: white;
-    &:hover {
-      color: white;
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--headerMaxWidth);
+    min-width: var(--headerMinWidth);
+    padding: 0 24px;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 auto;
+    color: var(--mainFontColor);
+    .app-title {
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .menu-list {
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      cursor: pointer;
+      .menu-item {
+        padding: 0 24px;
+        margin-right: 12px;
+        text-decoration: none;
+        color: var(--mainFontColor);
+        &:hover {
+          color: #00BFFF;
+        }
+      }
+      .active {
+        background: #00BFFF;
+        color: white;
+        &:hover {
+          color: white;
+        }
+      }
     }
   }
 }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import AppHeader from '../../component/common/app-header';
-import LayoutMain from '../../layout/main';
 import {recommendListType} from '../../types';
 import { Carousel } from 'antd';
 import './style.pcss';
@@ -34,9 +33,6 @@ export default class Recommend extends React.Component<Props> {
     return (
       <div className="recommend">
         <AppHeader></AppHeader>
-        <LayoutMain>
-          {recommendList}
-        </LayoutMain>
       </div>
     )
   }
