@@ -1,9 +1,24 @@
 import * as React from 'react';
+import {recommendTagDetailType} from '../../../../types';
+import './style.pcss';
+import { url } from 'inspector';
 
-class BoxList extends React.Component {
-  render () {
+interface Props {
+  recommendTagDetail: recommendTagDetailType
+}
+
+export default function BoxList({recommendTagDetail}: Props) {
+  let boxList = recommendTagDetail.playlists.map((item) => {
+    const imgStyle = {
+      backgroundImage: `url(${item.coverImgUrl})`
+    };
     return (
-      <div></div>
+      <li className="box-item" key={item.id} style={imgStyle}></li>
     )
-  }
+  })
+  return (
+    <ul className="recommend-box">
+      {boxList}
+    </ul>
+  )
 }

@@ -1,39 +1,55 @@
-import * as React from 'react';
-import AppHeader from '../../component/common/app-header';
-import {recommendListType} from '../../types';
-import { Carousel } from 'antd';
+import React, { useEffect, useState} from 'react';
+import {recommendTagsType, recommendTagDetailType, TagsType} from '../../types';
+import BoxList from '../recommend/components/box-list'
 import './style.pcss';
 
-
 interface Props {
-  recommendList: recommendListType,
-  fetchRemmendList: Function
+  recommendTags: recommendTagsType,
+  recommendTagDetail: recommendTagDetailType,
+  fetchRemmendTags: Function,
+  fetchRecommendDetail: Function
 }
 
-export default class Recommend extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-  componentDidMount() {
-   this.props.fetchRemmendList()
-  }
-  render () {
-    let recommendList;
-    if (this.props.recommendList.banner) {
-      recommendList = (
-        <Carousel autoplay>
-          {this.props.recommendList.banner.map((item: any, idx: number) => 
-            <div className="banner-img" key={idx} style={{backgroundImage: `url(${item.imgurl})`}}>
-              <img src={item.imgurl} width="100%" height="100%"/>
-            </div>
-          )}
-        </Carousel>
-      )
+export default function Recommend({recommendTags, recommendTagDetail, fetchRemmendTags, fetchRecommendDetail}: Props) {
+  useEffect(() => {
+    if (recommendTags.code === void 0) {
+      fetchRemmendTags()
     }
-    return (
-      <div className="recommend">
-        <AppHeader></AppHeader>
-      </div>
+    if (Object.keys(recommendTags).length > 0) {
+      fetchRecommendDetail(recommendTags.tags[0].name)
+    }
+  }, [recommendTags.code]);
+  let [activeTag, setActiveTag] = useState('华语');
+  let recommendBox;
+  function selectTag (selectedTag: TagsType, e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+    setActiveTag(selectedTag.name);
+    fetchRecommendDetail(selectedTag.name);
+  }
+  if (recommendTags && recommendTags.tags) {
+    recommendBox = recommendTags.tags.map((item) =>{
+      let tabClass = ['tag'];
+      if (activeTag === item.name) {
+        tabClass.push('active');
+      }
+      return (
+        <li className={tabClass.join(' ')} key={item.id} onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>) => selectTag(item, e)}>{item.name}</li>
+      )
+    })
+  }
+  let BoxListDom;
+  if (recommendTagDetail.playlists) {
+    BoxListDom = (
+      <BoxList recommendTagDetail={recommendTagDetail}/>
     )
   }
-};
+  return (
+    <div className="recommend">
+      <ul className="tags-list">
+        {recommendBox}
+      </ul>
+      <section>
+        {BoxListDom}
+      </section>
+    </div>
+  )
+}

@@ -1,0 +1,17 @@
+.recommend-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  overflow: auto;
+  .box-item {
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    transition: all 0.25s;
+    background: no-repeat center center / 100% content-box content-box;
+    cursor: pointer;
+    &:hover {
+      background-size: 130%;
+    }
+  }
+}

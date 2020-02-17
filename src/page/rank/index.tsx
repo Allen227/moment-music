@@ -1,21 +1,17 @@
 import * as React from 'react';
-import AppHeader from '../../component/common/app-header';
-import {recommendListType} from '../../types';
+import {recommendTagsType} from '../../types';
 
 
 interface Props {
-  recommendList: recommendListType,
+  recommendList: recommendTagsType,
   fetchRemmendList: Function
 }
 
 export default class Recommend extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
   render () {
     return (
       <div className="recommend">
-        <AppHeader></AppHeader>
+        <h1>Rank</h1>
       </div>
     )
   }

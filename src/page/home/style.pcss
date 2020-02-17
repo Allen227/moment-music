@@ -1,8 +1,12 @@
 .app-main {
   background: var(--mainBgColor);
-  &__container {
+  display: flex;
+  .container {
+    width: 100%;
     max-width: var(--mainMaxWidth);
     min-width: var(--mainMinWidth);
+    height: calc(100vh - 100px);
     margin: 0 auto;
+    overflow: auto;
   }
 }

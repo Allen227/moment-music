@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import {recommendList} from './recommend';
+import {recommendTags, recommendTagDetail} from './recommend';
 export default combineReducers({
-  recommendList
+  recommendTags,
+  recommendTagDetail
 });

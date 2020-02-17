@@ -1,25 +1,29 @@
 import * as React from 'react';
-import AppHeader from '../../component/common/app-header';
-import {recommendListType} from '../../types';
+import AppHeader from '../../component/header';
+import AppFooter from '../../component/footer';
+import {Route, Switch} from 'react-router-dom';
+import Recommend from '../../container/recommend/index';
+import Rank from '../../page/rank';
+import LeftSide from '../../component/left-side'
 import './style.pcss';
 
+interface Props {}
 
-interface Props {
-  recommendList: recommendListType,
-  fetchRemmendList: Function
-}
-
-export default class Recommend extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-  componentDidMount() {
-    this.props.fetchRemmendList()
-   }
+export default class Home extends React.Component<Props> {
   render () {
     return (
-      <div className="recommend">
+      <div className="home">
         <AppHeader></AppHeader>
+        <main className="app-main">
+          <LeftSide></LeftSide>
+          <article className="container">
+            <Switch>
+              <Route path="/recommend" component={Recommend}></Route>
+              <Route path="/rank" component={Rank}></Route>
+            </Switch>
+          </article>
+        </main>
+        <AppFooter></AppFooter>
       </div>
     )
   }

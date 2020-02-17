@@ -1,5 +1,6 @@
 .app-header {
   position: relative;
+  height: 45px;
   .header-bg {
     position: absolute;
     z-index: -1;
@@ -7,20 +8,21 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--mainColor);
+    background: var(--mainFgColor);
   }
   .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: var(--headerMaxWidth);
     min-width: var(--headerMinWidth);
     padding: 0 24px;
     height: 45px;
     line-height: 45px;
     margin: 0 auto;
     color: var(--mainFontColor);
+    border-bottom: 1px solid var(--borderColor);
     .app-title {
+      color: var(--mainFontColor);
       cursor: pointer;
       font-size: 18px;
     }
@@ -35,11 +37,11 @@
         text-decoration: none;
         color: var(--mainFontColor);
         &:hover {
-          color: #00BFFF;
+          color: var(--mainColor);
         }
       }
       .active {
-        background: #00BFFF;
+        background: var(--mainColor);
         color: white;
         &:hover {
           color: white;
