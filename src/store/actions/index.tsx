@@ -1,6 +1,7 @@
-import {fetchRemmendTags} from './recommendTag';
-import {fetchRecommendDetail} from './recommendDetail';
+import {fetchRemmendTags, fetchRecommendDetail} from './recommend';
+import {fetchPlaylistDetail} from './playlist';
 export {
   fetchRemmendTags,
-  fetchRecommendDetail
+  fetchRecommendDetail,
+  fetchPlaylistDetail
 };

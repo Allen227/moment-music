@@ -1,24 +1,13 @@
-export interface TagsType {
-  name: string,
-  id?: number
-}
-export interface recommendTagsType {
-  tags: Array<TagsType>,
-  code: number
-}
+import {requestActionType} from './base';
+import {TagsType, recommendTagsType, detailType, recommendTagDetailType} from './recommend';
+import {playlistType, playlistDetailType} from './playlist';
 
-export interface requestActionType {
-  type: string,
-  payload: object
-}
-
-export interface detailType {
-  id: number,
-  name: string,
-  coverImgUrl: string 
-}
-
-export interface recommendTagDetailType {
-  playlists: Array<detailType>,
-  code: number
+export {
+  requestActionType,
+  TagsType,
+  recommendTagsType,
+  detailType,
+  recommendTagDetailType,
+  playlistType,
+  playlistDetailType
 }

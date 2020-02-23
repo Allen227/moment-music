@@ -1,19 +1,32 @@
-import * as React from 'react';
+import React from 'react';
 import {recommendTagDetailType} from '../../../../types';
+import { useHistory } from "react-router-dom";
 import './style.pcss';
-import { url } from 'inspector';
 
 interface Props {
   recommendTagDetail: recommendTagDetailType
 }
 
 export default function BoxList({recommendTagDetail}: Props) {
+  let history = useHistory();
+
+  function jumpDetail (playlistId: number) {
+    history.push({
+      pathname: `/playlist-detail`,
+      state: {
+        id: playlistId
+      }
+    })
+  }
+
   let boxList = recommendTagDetail.playlists.map((item) => {
-    const imgStyle = {
-      backgroundImage: `url(${item.coverImgUrl})`
-    };
     return (
-      <li className="box-item" key={item.id} style={imgStyle}></li>
+      <li className="box-item" key={item.id} onClick={() => jumpDetail(item.id)}>
+        <div className="img-box">
+          <img className="img" src={item.coverImgUrl} alt="playlist-cover"/>
+        </div>
+        <div className="box-title">{item.name}</div>
+      </li>
     )
   })
   return (

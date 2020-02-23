@@ -4,7 +4,8 @@ import AppFooter from '../../component/footer';
 import {Route, Switch} from 'react-router-dom';
 import Recommend from '../../container/recommend/index';
 import Rank from '../../page/rank';
-import LeftSide from '../../component/left-side'
+import LeftSide from '../../component/left-side';
+import PlaylistDetail from '../../container/playlist-detail'
 import './style.pcss';
 
 interface Props {}
@@ -20,6 +21,7 @@ export default class Home extends React.Component<Props> {
             <Switch>
               <Route path="/recommend" component={Recommend}></Route>
               <Route path="/rank" component={Rank}></Route>
+              <Route path="/playlist-detail" component={PlaylistDetail}></Route>
             </Switch>
           </article>
         </main>

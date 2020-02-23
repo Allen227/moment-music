@@ -1,16 +1,20 @@
 import React, { useEffect, useState} from 'react';
 import {recommendTagsType, recommendTagDetailType, TagsType} from '../../types';
-import BoxList from '../recommend/components/box-list'
+import BoxList from '../recommend/components/box-list';
+
 import './style.pcss';
 
 interface Props {
   recommendTags: recommendTagsType,
   recommendTagDetail: recommendTagDetailType,
-  fetchRemmendTags: Function,
-  fetchRecommendDetail: Function
+  fetchRemmendTags: () => recommendTagsType,
+  fetchRecommendDetail: (tag: string) => recommendTagsType
 }
 
 export default function Recommend({recommendTags, recommendTagDetail, fetchRemmendTags, fetchRecommendDetail}: Props) {
+  let [activeTag, setActiveTag] = useState('华语');
+  let recommendBox;
+  /* eslint-disable */
   useEffect(() => {
     if (recommendTags.code === void 0) {
       fetchRemmendTags()
@@ -19,9 +23,8 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
       fetchRecommendDetail(recommendTags.tags[0].name)
     }
   }, [recommendTags.code]);
-  let [activeTag, setActiveTag] = useState('华语');
-  let recommendBox;
-  function selectTag (selectedTag: TagsType, e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+
+  function selectTag (selectedTag: TagsType) {
     setActiveTag(selectedTag.name);
     fetchRecommendDetail(selectedTag.name);
   }
@@ -32,12 +35,12 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
         tabClass.push('active');
       }
       return (
-        <li className={tabClass.join(' ')} key={item.id} onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>) => selectTag(item, e)}>{item.name}</li>
+        <li className={tabClass.join(' ')} key={item.id} onClick={() => selectTag(item)}>{item.name}</li>
       )
     })
   }
   let BoxListDom;
-  if (recommendTagDetail.playlists) {
+  if (Object.keys(recommendTagDetail).length > 0) {
     BoxListDom = (
       <BoxList recommendTagDetail={recommendTagDetail}/>
     )
@@ -47,9 +50,7 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
       <ul className="tags-list">
         {recommendBox}
       </ul>
-      <section>
-        {BoxListDom}
-      </section>
+      {BoxListDom}
     </div>
   )
 }

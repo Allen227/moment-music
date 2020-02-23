@@ -1,17 +1,29 @@
 .recommend-box {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  height: 100%;
   overflow: auto;
   .box-item {
+    width: 150px;
     margin: 20px;
-    width: 200px;
-    height: 200px;
-    transition: all 0.25s;
-    background: no-repeat center center / 100% content-box content-box;
-    cursor: pointer;
-    &:hover {
-      background-size: 130%;
+    .img-box {
+      cursor: pointer;
+      width: inherit;
+      height: 150px;
+      overflow: hidden;
+      .img {
+        transition: all 0.25s;
+        width: 100%;
+        height: 100%;
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+    .box-title {
+      width: inherit;
+      margin: 0 auto;
+      font-size: var(--fontSmallSize);
     }
   }
 }
