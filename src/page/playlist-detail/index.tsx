@@ -12,13 +12,28 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail}: P
   let location = useLocation();
   let playlistId = location.state.id;
 
+  /* eslint-disable */
   useEffect(() => {
     fetchPlaylistDetail(playlistId);
   }, []);
+
   let topInfo;
+
   if (playlistDetail.playlist) {
+    let playList = playlistDetail.playlist;
     topInfo = (
-      <img className="playlist-cover" src={playlistDetail.playlist.coverImgUrl} alt="playlist cover"></img>
+      <div className="playlist-top">
+        <img className="playlist-cover" src={playList.coverImgUrl} alt="playlist cover"></img>
+        <div className="playlist-info">
+          <h2 className="playlist-title">{playList.name}</h2>
+          <p className="playlist-desc">{playList.description}</p>
+        </div>
+        <div className="list-wrapper">
+          <ul className="detail-list">
+            <li className="song-item"></li>
+          </ul>
+        </div>
+      </div>
     );
   }
   return (

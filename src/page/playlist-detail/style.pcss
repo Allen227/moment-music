@@ -1,7 +1,34 @@
 .playlist-detail {
-  padding: 45px;
-  .playlist-cover {
-    width: 200px;
-    height: 200px;
+  margin: 0 45px;
+  .playlist-top {
+    position: relative;
+    margin-top: 45px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--borderColor);
+    .playlist-cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      margin-right: 45px;
+      overflow: hidden;
+    }
+    .playlist-info {
+      padding-left: 250px;
+      height: 200px;
+      .playlist-title {
+        text-align: left;
+        color: var(--mainFontColor);
+      }
+      .playlist-desc {
+        color: var(--descFontColor);
+      }
+    }
+  }
+  .list-wrapper {
+    .detail-list {
+      
+    }
   }
 }
