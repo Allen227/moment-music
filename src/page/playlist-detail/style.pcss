@@ -1,8 +1,10 @@
 .playlist-detail {
-  margin: 0 45px;
+  padding: 45px 45px 0;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
   .playlist-top {
     position: relative;
-    margin-top: 45px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--borderColor);
     .playlist-cover {
@@ -27,8 +29,24 @@
     }
   }
   .list-wrapper {
+    padding-top: 20px;
     .detail-list {
-      
+      cursor: pointer;
+      .list-item {
+        font-size: 12px;
+        height: 30px;
+        line-height: 30px;
+        padding-left: 12px;
+        .track-index {
+          margin-right: 12px;
+        }
+        &:nth-child(even) {
+          background: #f0f1f2;
+        }
+        &:hover {
+          background: #e0e1e2;
+        }
+      }
     }
   }
 }

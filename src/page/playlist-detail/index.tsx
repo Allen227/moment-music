@@ -18,9 +18,10 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail}: P
   }, []);
 
   let topInfo;
-
+  let songslist;
   if (playlistDetail.playlist) {
     let playList = playlistDetail.playlist;
+  songslist = playList.tracks.map((track, idx) => <li className="list-item song"><span className="track-index">{idx}</span>{track.name}</li>)
     topInfo = (
       <div className="playlist-top">
         <img className="playlist-cover" src={playList.coverImgUrl} alt="playlist cover"></img>
@@ -28,17 +29,17 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail}: P
           <h2 className="playlist-title">{playList.name}</h2>
           <p className="playlist-desc">{playList.description}</p>
         </div>
-        <div className="list-wrapper">
-          <ul className="detail-list">
-            <li className="song-item"></li>
-          </ul>
-        </div>
       </div>
     );
   }
   return (
     <div className="playlist-detail">
       {topInfo}
+      <div className="list-wrapper">
+        <ul className="detail-list">
+          {songslist}
+        </ul>
+      </div>
     </div>
   )
 }

@@ -1,5 +1,9 @@
+export interface track {
+  name: string
+}
+
 export interface playlistType {
-  subscribers: Array<object>,
+  tracks: Array<track>,
   coverImgUrl: string,
   name: string,
   description: string
