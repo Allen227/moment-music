@@ -10,6 +10,15 @@ const playlistDetail = (state: object = {}, action: requestActionType): object =
   return state;
 };
 
+const songUrl = (state: object = {}, action: requestActionType): object => {
+  switch (action.type) {
+    case actionTypes.FETCH_SONG_URL.SUCCESS:
+      return Object.assign({}, state, action.payload);
+  }
+  return state;
+};
+
 export {
   playlistDetail,
+  songUrl
 };

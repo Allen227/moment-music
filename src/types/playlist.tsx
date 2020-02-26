@@ -15,3 +15,8 @@ export interface playlistDetailType {
   code: number,
   playlist: playlistType
 }
+
+export interface songUrlType {
+  code: number,
+  data: Array<any>
+}

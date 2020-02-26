@@ -8,7 +8,8 @@ function mapStateToProps (state: object) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchPlaylistDetail: (playlistId: number) => dispatch(actions.fetchPlaylistDetail(playlistId))
+    fetchPlaylistDetail: (playlistId: number) => dispatch(actions.fetchPlaylistDetail(playlistId)),
+    fetchSongUrl: async (songId: number) => await actions.fetchSongUrl(songId)
   }
 }
 
