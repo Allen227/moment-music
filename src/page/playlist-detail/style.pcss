@@ -28,17 +28,34 @@
       }
     }
   }
-  .list-wrapper {
+  .table-wrapper {
+    display: table;
+    width: 100%;
     padding-top: 20px;
-    .detail-list {
+    .table-title {
+      display: table-header-group;
+      font-size: 13px;
+      .title-item {
+        display: table-cell;
+        height: 25px;
+        line-height: 25px;
+        border: 1px solid var(--borderColor);
+        border-left-width: 0;
+        padding-left: 12px;
+      }
+    }
+    .table-content {
+      display: table-row-group;
       cursor: pointer;
-      .list-item {
+      color: var(--grayColor);
+      .table-row {
+        display: table-row;
         font-size: 12px;
         height: 30px;
         line-height: 30px;
-        padding-left: 12px;
-        .track-index {
-          margin-right: 12px;
+        .table-cell {
+          display: table-cell;
+          padding-left: 12px;
         }
         &:nth-child(even) {
           background: #f0f1f2;

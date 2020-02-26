@@ -12,7 +12,7 @@ export default function BoxList({recommendTagDetail}: Props) {
 
   function jumpDetail (playlistId: number) {
     history.push({
-      pathname: `/playlist-detail`,
+      pathname: '/playlist-detail',
       state: {
         id: playlistId
       }

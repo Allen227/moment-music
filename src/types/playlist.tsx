@@ -1,5 +1,8 @@
 export interface track {
-  name: string
+  name: string,
+  id: number,
+  ar: Array<any>,
+  dt: number
 }
 
 export interface playlistType {
