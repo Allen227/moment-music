@@ -32,7 +32,7 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   if (playlistDetail.playlist) {
     let playList = playlistDetail.playlist;
     songslist = playList.tracks.map((track, idx) => {
-      let seconds = track.dt % 60;
+      let seconds = Math.floor(track.dt / 1000) % 60;
       return (
         <div className="table-row" key={track.id} onClick={() => playSong(track.id)}>
           <span className="table-cell track-index">{idx}</span>
