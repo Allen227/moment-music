@@ -35,7 +35,7 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
       let seconds = Math.floor(track.dt / 1000) % 60;
       return (
         <div className="table-row" key={track.id} onClick={() => playSong(track.id)}>
-          <span className="table-cell track-index">{idx}</span>
+          <span className="table-cell track-index">{idx + 1}</span>
           <span className="table-cell song-name">{track.name}</span>
           <span className="table-cell song-player">{track.ar[0].name}</span>
           <span className="table-cell song-time">{`${Math.floor(track.dt / 6e4)}分${seconds < 10 ? '0' + seconds : seconds}秒`}</span>
