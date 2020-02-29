@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import {playlistDetailType, songUrlType} from '../../types/playlist';
 import './style.pcss';
-import AudioPlayer from '../../plugin/audioPlayer/index'
+import AudioPlayer from '../../plugin/audioPlayer/index';
 import { Scrollbars } from 'react-custom-scrollbars';
 interface Props {
   fetchPlaylistDetail: Function,
@@ -63,8 +63,8 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   }
   return (
     <div className="playlist-detail">
-      {topInfo}
-      <Scrollbars style={{ width: '100%', height: '100%' }}>
+      <Scrollbars style={{ width: '100%', height: '100%' }} autoHide>
+        {topInfo}
         <div className="table-wrapper">
           <div className="table-title">
             <div className="title-item"></div>

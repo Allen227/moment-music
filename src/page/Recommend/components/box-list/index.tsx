@@ -31,7 +31,7 @@ export default function BoxList({recommendTagDetail}: Props) {
     )
   })
   return (
-    <Scrollbars style={{width: '100%', height: '100%'}}>
+    <Scrollbars style={{width: '100%', height: '100%'}} autoHide>
       <ul className="recommend-box">
         {boxList}
       </ul>
