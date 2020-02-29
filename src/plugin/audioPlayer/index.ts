@@ -1,12 +1,34 @@
+/**
+ * AudioPlayer
+ */
 export default class AudioPlayer {
-  constructor (private audioDom: HTMLMediaElement) {}
+  private static _instance: AudioPlayer;
+  private audio: HTMLMediaElement;
+  constructor () {
+    this.audio = new Audio();
+  }
+  /**
+   * get single instance
+   */
+  public static getInstance () {
+    if (!this._instance) {
+      this._instance = new AudioPlayer();
+    }
+    return this._instance;
+  }
   public play () {
-    this.audioDom.play();
+    if (this.audio) {
+      this.audio.play();
+    }
   }
   public load () {
-    this.audioDom.load();
+    if (this.audio) {
+      this.audio.load();
+    }
   }
   public setSrc (source: string) {
-    this.audioDom.src = source;
+    if (this.audio) {
+      this.audio.src = source;
+    }
   }
 }

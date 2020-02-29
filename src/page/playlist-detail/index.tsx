@@ -27,7 +27,7 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   let topInfo;
   let songslist;
 
-  const audioPlayer = new AudioPlayer(audioDom);
+  const audioPlayer = AudioPlayer.getInstance();
 
   async function playSong (songId: number) {
     const songUrlData = await fetchSongUrl(songId);
