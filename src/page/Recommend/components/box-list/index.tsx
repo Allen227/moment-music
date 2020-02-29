@@ -1,6 +1,7 @@
 import React from 'react';
 import {recommendTagDetailType} from '../../../../types';
 import { useHistory } from "react-router-dom";
+import { Scrollbars } from 'react-custom-scrollbars';
 import './style.pcss';
 
 interface Props {
@@ -30,8 +31,10 @@ export default function BoxList({recommendTagDetail}: Props) {
     )
   })
   return (
-    <ul className="recommend-box">
-      {boxList}
-    </ul>
+    <Scrollbars style={{width: '100%', height: '100%'}}>
+      <ul className="recommend-box">
+        {boxList}
+      </ul>
+    </Scrollbars>
   )
 }

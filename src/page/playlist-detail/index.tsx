@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import {playlistDetailType, songUrlType} from '../../types/playlist';
 import './style.pcss';
-
+import AudioPlayer from '../../plugin/audioPlayer/index'
+import { Scrollbars } from 'react-custom-scrollbars';
 interface Props {
   fetchPlaylistDetail: Function,
   fetchSongUrl: Function,
@@ -10,10 +11,14 @@ interface Props {
   songUrl: songUrlType
 }
 
-export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, songUrl}: Props) {
-  let location = useLocation();
-  let playlistId = location.state.id;
-  let audioDom: any = document.querySelector('#moment-audio');
+interface locationType {
+  state: any
+}
+
+export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl}: Props) {
+  let location: locationType = useLocation();
+  let playlistId: number = location.state.id;
+  let audioDom: HTMLMediaElement = document.querySelector('#moment-audio') as HTMLMediaElement;
   /* eslint-disable */
   useEffect(() => {
     fetchPlaylistDetail(playlistId);
@@ -22,11 +27,15 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   let topInfo;
   let songslist;
 
+  const audioPlayer = new AudioPlayer(audioDom);
+
   async function playSong (songId: number) {
     const songUrlData = await fetchSongUrl(songId);
-    audioDom.src = songUrlData.data[0].url;
-    audioDom.load();
-    audioDom.play();
+    if (audioDom !== void 0) {
+      audioPlayer.setSrc(songUrlData.data[0].url);
+      audioPlayer.load();
+      audioPlayer.play();
+    }
   }
 
   if (playlistDetail.playlist) {
@@ -55,17 +64,19 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   return (
     <div className="playlist-detail">
       {topInfo}
-      <div className="table-wrapper">
-        <div className="table-title">
-          <div className="title-item"></div>
-          <div className="title-item">歌曲</div>
-          <div className="title-item">歌手</div>
-          <div className="title-item">时长</div>
+      <Scrollbars style={{ width: '100%', height: '100%' }}>
+        <div className="table-wrapper">
+          <div className="table-title">
+            <div className="title-item"></div>
+            <div className="title-item">歌曲</div>
+            <div className="title-item">歌手</div>
+            <div className="title-item">时长</div>
+          </div>
+          <div className="table-content">
+            {songslist}
+          </div>
         </div>
-        <div className="table-content">
-          {songslist}
-        </div>
-      </div>
+      </Scrollbars>
     </div>
   )
 }
