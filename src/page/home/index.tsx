@@ -23,7 +23,6 @@ export default class Home extends React.Component {
             </article>
         </main>
         <AppFooter></AppFooter>
-        <audio id="moment-audio" controls></audio>
       </div>
     )
   }
