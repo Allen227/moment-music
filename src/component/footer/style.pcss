@@ -1,6 +1,7 @@
 .app-footer {
   position: relative;
   height: 55px;
+  border-top: 1px solid var(--borderColor);
   .footer-bg {
     position: absolute;
     z-index: -1;
@@ -11,6 +12,48 @@
     background: var(--mainFgColor);
   }
   .footer-container {
-    border-top: 1px solid var(--borderColor);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    height: inherit;
+    .player-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 120px;
+      .play-btn {
+        position: relative;
+        width: 32px;
+        height: 32px;
+        border: 2px solid black;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        .play-icon {
+          position: relative;
+          width: 2px;
+          height: 20px;
+          background: black;
+          margin-left: 12px;
+          &::before, &::after {
+            content: " ";
+            position: absolute;
+            width: inherit;
+            height: 15px;
+            background: inherit;
+          }
+          &::before {
+            top: -3px;
+            left: 5px;
+            transform: rotate(-45deg)
+          }
+          &::after {
+            top: 6px;
+            left: 6px;
+            transform: rotate(50deg)
+          }
+        }
+      }
+    }
   }
 }

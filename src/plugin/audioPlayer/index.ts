@@ -2,18 +2,12 @@
  * AudioPlayer
  */
 export default class AudioPlayer {
-  private static _instance: AudioPlayer;
-  private audio: HTMLMediaElement;
-  constructor () {
-    this.audio = new Audio();
-  }
+  private static _instance: AudioPlayer = new AudioPlayer();;
+  private audio: HTMLMediaElement = new Audio();
   /**
    * get single instance
    */
   public static getInstance () {
-    if (!this._instance) {
-      this._instance = new AudioPlayer();
-    }
     return this._instance;
   }
   public play () {
