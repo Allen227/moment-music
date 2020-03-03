@@ -41,16 +41,22 @@
             width: inherit;
             height: 15px;
             background: inherit;
+            transition: all 0.25s linear;
           }
           &::before {
-            top: -3px;
-            left: 5px;
-            transform: rotate(-45deg)
+            top: 0px;
+            left: 6px;
+            transform: rotate(-45deg);
           }
           &::after {
-            top: 6px;
+            top: 4px;
             left: 6px;
-            transform: rotate(50deg)
+            transform: rotate(50deg);
+          }
+        }
+        .play-icon.active {
+          &::before, &::after {
+            transform: rotate(0deg);
           }
         }
       }

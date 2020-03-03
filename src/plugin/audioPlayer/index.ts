@@ -11,14 +11,13 @@ export default class AudioPlayer {
     return this._instance;
   }
   public play () {
-    if (this.audio) {
-      this.audio.play();
-    }
+    this.audio.play();
+  }
+  public pause () {
+    this.audio.pause();
   }
   public load () {
-    if (this.audio) {
-      this.audio.load();
-    }
+    this.audio.load();
   }
   public setSrc (source: string) {
     if (this.audio) {

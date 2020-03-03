@@ -2,20 +2,23 @@ import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import {playlistDetailType, songUrlType} from '../../types/playlist';
 import './style.pcss';
-import AudioPlayer from '../../plugin/audioPlayer/index';
 import { Scrollbars } from 'react-custom-scrollbars';
+import {playMusic, setSource, loadSource} from '../../store/actions';
 interface Props {
   fetchPlaylistDetail: Function,
   fetchSongUrl: Function,
   playlistDetail: playlistDetailType,
-  songUrl: songUrlType
+  songUrl: songUrlType,
+  playMusic: Function,
+  loadSource: Function,
+  setSource: Function
 }
 
 interface locationType {
   state: any
 }
 
-export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl}: Props) {
+export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource}: Props) {
   let location: locationType = useLocation();
   let playlistId: number = location.state.id;
   let audioDom: HTMLMediaElement = document.querySelector('#moment-audio') as HTMLMediaElement;
@@ -27,14 +30,14 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   let topInfo;
   let songslist;
 
-  const audioPlayer = AudioPlayer.getInstance();
+  // const audioPlayer = AudioPlayer.getInstance();
 
   async function playSong (songId: number) {
     const songUrlData = await fetchSongUrl(songId);
     if (audioDom !== void 0) {
-      audioPlayer.setSrc(songUrlData.data[0].url);
-      audioPlayer.load();
-      audioPlayer.play();
+      setSource(songUrlData.data[0].url);
+      loadSource();
+      playMusic();
     }
   }
 

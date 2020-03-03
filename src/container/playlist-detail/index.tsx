@@ -9,7 +9,10 @@ function mapStateToProps (state: object) {
 function mapDispatchToProps(dispatch: any) {
   return {
     fetchPlaylistDetail: (playlistId: number) => dispatch(actions.fetchPlaylistDetail(playlistId)),
-    fetchSongUrl: async (songId: number) => await actions.fetchSongUrl(songId)
+    fetchSongUrl: async (songId: number) => await actions.fetchSongUrl(songId),
+    playMusic: () => dispatch(actions.playMusic()),
+    loadSource: () => dispatch(actions.loadSource()),
+    setSource: (source: string) => dispatch(actions.setSource(source))
   }
 }
 
