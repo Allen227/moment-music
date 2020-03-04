@@ -5,8 +5,6 @@ import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
 import parseTime from '../../plugin//parseTime';
 interface Props {
-  fetchPlaylistDetail: Function,
-  fetchSongUrl: Function,
   playlistDetail: playlistDetailType,
   songUrl: songUrlType,
   playMusic: Function,
@@ -14,6 +12,8 @@ interface Props {
   setSource: Function,
   setLoop: Function,
   pushPlayTracks: Function,
+  fetchPlaylistDetail: Function,
+  fetchSongUrl: Function,
   setPlayIndex: Function
 }
 
