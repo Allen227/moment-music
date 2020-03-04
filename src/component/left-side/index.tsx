@@ -10,7 +10,7 @@ function LeftSide () {
   if (historyList) {
     trackList = JSON.parse(historyList).map((track: songTrack) => {
       return (
-        <li className="list-item">
+        <li className="list-item" key={track.id}>
           <span className="song-name">{track.name}</span>
           <span className="song-time">{parseTime(track.dt)}</span>
         </li>

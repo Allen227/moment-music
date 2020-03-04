@@ -34,7 +34,8 @@ export const MUSIC_PLAYER = {
   STOP_MUSIC: 'STOP_MUSIC',
   SET_SOURCE: 'SET_SOURCE',
   LOAD_SOURCE: 'LOAD_SOURCE',
-  SET_LOOP: 'SET_LOOP'
+  SET_LOOP: 'SET_LOOP',
+  SET_PLAY_INDEX: 'SET_PLAY_INDEX'
 }
 
 export type PLAY_MUSIC = typeof MUSIC_PLAYER.PLAY_MUSIC;
@@ -42,6 +43,7 @@ export type STOP_MUSIC = typeof MUSIC_PLAYER.STOP_MUSIC;
 export type SET_SOURCE = typeof MUSIC_PLAYER.SET_SOURCE;
 export type LOAD_SOURCE = typeof MUSIC_PLAYER.LOAD_SOURCE;
 export type SET_LOOP = typeof MUSIC_PLAYER.SET_LOOP;
+export type SET_PLAY_INDEX = typeof MUSIC_PLAYER.SET_PLAY_INDEX;
 // play tracks
-export const PLAY_TRACKS = 'PLAY_TRACKS';
-export type PLAY_TRACKS = typeof PLAY_TRACKS;
+export const PUSH_TRACKS = 'PUSH_TRACKS'
+export type PUSH_TRACKS = typeof PUSH_TRACKS;

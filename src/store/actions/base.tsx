@@ -1,7 +1,13 @@
 import * as actionTypes from '../../const/index';
+import {songTrack} from '../../types/index';
 
-const updatePlayTracks = function () {
+const pushPlayTracks = function (track: songTrack) {
   return {
-    type: actionTypes.PLAY_TRACKS
+    type: actionTypes.PUSH_TRACKS,
+    payload: track
   }
+}
+
+export {
+  pushPlayTracks
 }

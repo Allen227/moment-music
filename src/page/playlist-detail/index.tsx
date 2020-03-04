@@ -12,14 +12,16 @@ interface Props {
   playMusic: Function,
   loadSource: Function,
   setSource: Function,
-  setLoop: Function
+  setLoop: Function,
+  pushPlayTracks: Function,
+  setPlayIndex: Function
 }
 
 interface locationType {
   state: any
 }
 
-export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop}: Props) {
+export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop, pushPlayTracks, setPlayIndex}: Props) {
   let location: locationType = useLocation();
   let playlistId: number = location.state.id;
   /* eslint-disable */
@@ -38,11 +40,11 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
       picUrl: track.al.picUrl,
       source: songUrlData.data[0].url,
       dt: track.dt
-    }
-    setLoop();
-    setSource(songInfo, index);
+    };
+    setSource(songInfo.source);
     loadSource();
     playMusic();
+    pushPlayTracks(songInfo);
   }
 
   if (playlistDetail.playlist) {
