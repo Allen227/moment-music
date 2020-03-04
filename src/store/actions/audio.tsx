@@ -22,11 +22,11 @@ export function loadSource () {
 }
 
 
-export function setSource (source: string, playIndex: number) {
+export function setSource (songInfo: object, playIndex: number) {
   return {
     type: actionTypes.MUSIC_PLAYER.SET_SOURCE,
     payload: {
-      source,
+      songInfo,
       playIndex
     }
   }

@@ -1,13 +1,15 @@
-import {requestActionType} from './base';
+import {requestActionType, songTrack} from './base';
 import {TagsType, recommendTagsType, detailType, recommendTagDetailType} from './recommend';
-import {playlistType, playlistDetailType} from './playlist';
+import {playlistType, playlistDetailType, songUrlType} from './playlist';
 
 export {
+  songTrack,
   requestActionType,
   TagsType,
   recommendTagsType,
   detailType,
   recommendTagDetailType,
   playlistType,
-  playlistDetailType
+  playlistDetailType,
+  songUrlType
 }

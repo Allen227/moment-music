@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
-import {playlistDetailType, songUrlType} from '../../types/playlist';
+import {playlistDetailType, songUrlType, songTrack} from '../../types/index';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
 interface Props {
@@ -29,12 +29,16 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   let topInfo;
   let songslist;
 
-  // const audioPlayer = AudioPlayer.getInstance();
-
-  async function playSong (songId: number, index: number) {
-    const songUrlData = await fetchSongUrl(songId);
+  async function playSong (track: any, index: number) {
+    const songUrlData = await fetchSongUrl(track.id);
+    const songInfo = {
+      id: track.id,
+      name: track.name,
+      picUrl: track.al.picUrl,
+      source: songUrlData.data[0].url
+    }
     setLoop();
-    setSource(songUrlData.data[0].url, index);
+    setSource(songInfo, index);
     loadSource();
     playMusic();
   }
@@ -44,7 +48,7 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
     songslist = playList.tracks.map((track, idx) => {
       let seconds = Math.floor(track.dt / 1000) % 60;
       return (
-        <div className="table-row" key={track.id} onClick={() => playSong(track.id, idx)}>
+        <div className="table-row" key={track.id} onClick={() => playSong(track, idx)}>
           <span className="table-cell track-index">{idx + 1}</span>
           <span className="table-cell song-name">{track.name}</span>
           <span className="table-cell song-player">{track.ar[0].name}</span>
