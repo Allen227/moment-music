@@ -22,9 +22,18 @@ export function loadSource () {
 }
 
 
-export function setSource (source: string) {
+export function setSource (source: string, playIndex: number) {
   return {
     type: actionTypes.MUSIC_PLAYER.SET_SOURCE,
-    payload: source
+    payload: {
+      source,
+      playIndex
+    }
+  }
+}
+
+export function setLoop () {
+  return {
+    type: actionTypes.MUSIC_PLAYER.SET_LOOP
   }
 }

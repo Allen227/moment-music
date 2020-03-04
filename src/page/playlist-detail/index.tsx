@@ -3,7 +3,6 @@ import {useLocation} from 'react-router-dom';
 import {playlistDetailType, songUrlType} from '../../types/playlist';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
-import {playMusic, setSource, loadSource} from '../../store/actions';
 interface Props {
   fetchPlaylistDetail: Function,
   fetchSongUrl: Function,
@@ -11,17 +10,17 @@ interface Props {
   songUrl: songUrlType,
   playMusic: Function,
   loadSource: Function,
-  setSource: Function
+  setSource: Function,
+  setLoop: Function
 }
 
 interface locationType {
   state: any
 }
 
-export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource}: Props) {
+export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop}: Props) {
   let location: locationType = useLocation();
   let playlistId: number = location.state.id;
-  let audioDom: HTMLMediaElement = document.querySelector('#moment-audio') as HTMLMediaElement;
   /* eslint-disable */
   useEffect(() => {
     fetchPlaylistDetail(playlistId);
@@ -32,13 +31,12 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
 
   // const audioPlayer = AudioPlayer.getInstance();
 
-  async function playSong (songId: number) {
+  async function playSong (songId: number, index: number) {
     const songUrlData = await fetchSongUrl(songId);
-    if (audioDom !== void 0) {
-      setSource(songUrlData.data[0].url);
-      loadSource();
-      playMusic();
-    }
+    setLoop();
+    setSource(songUrlData.data[0].url, index);
+    loadSource();
+    playMusic();
   }
 
   if (playlistDetail.playlist) {
@@ -46,7 +44,7 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
     songslist = playList.tracks.map((track, idx) => {
       let seconds = Math.floor(track.dt / 1000) % 60;
       return (
-        <div className="table-row" key={track.id} onClick={() => playSong(track.id)}>
+        <div className="table-row" key={track.id} onClick={() => playSong(track.id, idx)}>
           <span className="table-cell track-index">{idx + 1}</span>
           <span className="table-cell song-name">{track.name}</span>
           <span className="table-cell song-player">{track.ar[0].name}</span>

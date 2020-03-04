@@ -3,7 +3,11 @@
  */
 export default class AudioPlayer {
   private static _instance: AudioPlayer = new AudioPlayer();;
-  private audio: HTMLMediaElement = new Audio();
+  private audio: HTMLMediaElement;
+  constructor () {
+    this.audio = new Audio();
+    this.audio.loop = true;
+  }
   /**
    * get single instance
    */
@@ -20,8 +24,9 @@ export default class AudioPlayer {
     this.audio.load();
   }
   public setSrc (source: string) {
-    if (this.audio) {
-      this.audio.src = source;
-    }
+    this.audio.src = source;
+  }
+  public setLoop () {
+    this.audio.loop = true;
   }
 }
