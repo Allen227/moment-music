@@ -3,6 +3,7 @@ import {useLocation} from 'react-router-dom';
 import {playlistDetailType, songUrlType, songTrack} from '../../types/index';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
+import parseTime from '../../plugin//parseTime';
 interface Props {
   fetchPlaylistDetail: Function,
   fetchSongUrl: Function,
@@ -35,7 +36,8 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
       id: track.id,
       name: track.name,
       picUrl: track.al.picUrl,
-      source: songUrlData.data[0].url
+      source: songUrlData.data[0].url,
+      dt: track.dt
     }
     setLoop();
     setSource(songInfo, index);
@@ -46,13 +48,12 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   if (playlistDetail.playlist) {
     let playList = playlistDetail.playlist;
     songslist = playList.tracks.map((track, idx) => {
-      let seconds = Math.floor(track.dt / 1000) % 60;
       return (
         <div className="table-row" key={track.id} onClick={() => playSong(track, idx)}>
           <span className="table-cell track-index">{idx + 1}</span>
           <span className="table-cell song-name">{track.name}</span>
           <span className="table-cell song-player">{track.ar[0].name}</span>
-          <span className="table-cell song-time">{`${Math.floor(track.dt / 6e4)}分${seconds < 10 ? '0' + seconds : seconds}秒`}</span>
+          <span className="table-cell song-time">{parseTime(track.dt)}</span>
         </div>
       )
     })

@@ -42,3 +42,6 @@ export type STOP_MUSIC = typeof MUSIC_PLAYER.STOP_MUSIC;
 export type SET_SOURCE = typeof MUSIC_PLAYER.SET_SOURCE;
 export type LOAD_SOURCE = typeof MUSIC_PLAYER.LOAD_SOURCE;
 export type SET_LOOP = typeof MUSIC_PLAYER.SET_LOOP;
+// play tracks
+export const PLAY_TRACKS = 'PLAY_TRACKS';
+export type PLAY_TRACKS = typeof PLAY_TRACKS;

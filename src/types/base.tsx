@@ -7,5 +7,6 @@ export interface songTrack {
   id: number,
   name: string,
   picUrl: string,
-  source: string
+  source: string,
+  dt: number
 }
