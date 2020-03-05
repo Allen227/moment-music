@@ -2,6 +2,7 @@ import * as React from 'react';
 import './style.pcss';
 import SvgIcon from '../svg-icon';
 import {curSongInfo, songTrack} from '../../types/index';
+import { Slider } from 'antd';
 
 interface Props {
   status: boolean,
@@ -68,6 +69,9 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
             <div className={statusClass.join(' ')}></div>
           </div>
           <SvgIcon href="iconxiayige" customStyle={nextSongIcon} event={() => controlPreOrNext(1)}/>
+        </div>
+        <div className="slide-bar">
+          <Slider defaultValue={30} />
         </div>
       </div>
     </footer>

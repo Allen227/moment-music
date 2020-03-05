@@ -45,6 +45,8 @@
     height: 70px;
     padding: 0 12px;
     border-top: 1px solid var(--borderColor);
+    opacity: 0;
+    transition: opacity 0.25s ease;
     .music-img {
       position: absolute;
       top: 50%;
@@ -66,5 +68,8 @@
         color: var(--grayColor);
       }
     }
+  }
+  .active {
+    opacity: 1;
   }
 }

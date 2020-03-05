@@ -21,17 +21,26 @@ function LeftSide ({curSongInfo}: Props) {
       )
     })
   }
+  let curSongBoxClass = ['cur-music-box'];
+  let playListStyle;
+  if (!!curSongInfo.id) {
+    curSongBoxClass.push('active');
+  } else {
+    playListStyle = {
+      height: 'calc(100% - 40px)'
+    }
+  }
   return (
     <aside className="left-side">
       <h2 className="title">播放列表</h2>
-      <div className="track-container">
+      <div className="track-container" style={playListStyle}>
         <Scrollbars style={{ width: '100%', height: '100%' }} autoHide>
           <ul className="track-list">
             {trackList}
           </ul>
         </Scrollbars>
       </div>
-      <div className="cur-music-box">
+      <div className={curSongBoxClass.join(' ')}>
         <img className="music-img" src={curSongInfo.picUrl}></img>
         <div className="music-info">
           <h3 className="music-title">{curSongInfo.name}</h3>
