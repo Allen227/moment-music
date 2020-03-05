@@ -8,8 +8,11 @@ export function mapStateToProps(state: object) {
 
 export function mapDispatchToProps(dispatch: any) {
   return {
+    loadSource: () => dispatch(actions.loadSource()),
+    setSource: (source: object) => dispatch(actions.setSource(source)),
     stopMusic: () => dispatch(actions.stopMusic()),
-    playMusic: () => dispatch(actions.playMusic())
+    playMusic: () => dispatch(actions.playMusic()),
+    setStatus: (status: boolean) => dispatch(actions.setStatus(status))
   };
 };
 

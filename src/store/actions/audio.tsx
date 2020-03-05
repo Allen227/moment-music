@@ -41,3 +41,10 @@ export function setLoop () {
     type: actionTypes.MUSIC_PLAYER.SET_LOOP
   }
 }
+
+export function setStatus (status: boolean) {
+  return {
+    type: actionTypes.MUSIC_PLAYER.SET_STATUS,
+    payload: status
+  }
+}

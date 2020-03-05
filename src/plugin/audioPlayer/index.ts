@@ -26,6 +26,9 @@ export default class AudioPlayer {
   public setSrc (source: string) {
     this.audio.src = source;
   }
+  public getSrc() {
+    return this.audio.src;
+  }
   public setLoop () {
     this.audio.loop = true;
   }

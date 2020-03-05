@@ -3,9 +3,18 @@ import audioPlayer from '../../plugin/audioPlayer';
 
 function curSongInfo (state: object = {}, action: any) {
   const audio = audioPlayer.getInstance();
+  const localSongInfo = localStorage.getItem('curSongInfo');
+  let parsedSongInfo;
+  if (localSongInfo) {
+    parsedSongInfo = JSON.parse(localSongInfo);
+  }
 
   switch(action.type) {
     case actionTypes.MUSIC_PLAYER.PLAY_MUSIC:
+      // set default song source
+      if (!audio.getSrc() && localSongInfo) {
+        audio.setSrc(parsedSongInfo.source);
+      }
       audio.play();
       return Object.assign({}, state, {status: action.payload});
     case actionTypes.MUSIC_PLAYER.STOP_MUSIC:
@@ -20,12 +29,10 @@ function curSongInfo (state: object = {}, action: any) {
     break;
     case actionTypes.MUSIC_PLAYER.SET_PLAY_INDEX:
       return Object.assign({}, state, {playIndex: action.payload});
-
+    case actionTypes.MUSIC_PLAYER.SET_STATUS:
+        return Object.assign({}, state, {status: action.payload});
   }
-  const localSongInfo = localStorage.getItem('curSongInfo');
-  if (localSongInfo) {
-    return Object.assign({}, state, JSON.parse(localSongInfo));
-  }
+  return Object.assign({}, state, parsedSongInfo);
 }
 
 export default curSongInfo;

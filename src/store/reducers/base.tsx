@@ -3,7 +3,7 @@ import {songTrack} from '../../types/index';
 
 const playTracks = function (state: Array<object> = [], action: any) {
   const localTracks = localStorage.getItem('songTracks');
-  let parsedTracks;
+  let parsedTracks = [];
   if (localTracks) {
     parsedTracks = JSON.parse(localTracks);
     state = parsedTracks;

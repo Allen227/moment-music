@@ -11,6 +11,9 @@
       position: relative;
       height: 40px;;
       line-height: 40px;
+      &:hover, &.active {
+        color: var(--mainColor);
+      }
       &:hover::after, &.active::after {
         content: " ";
         position: absolute;

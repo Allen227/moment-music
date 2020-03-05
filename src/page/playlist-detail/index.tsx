@@ -4,6 +4,8 @@ import {playlistDetailType, songUrlType, songTrack} from '../../types/index';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
 import parseTime from '../../plugin//parseTime';
+import { message } from 'antd';
+
 interface Props {
   playlistDetail: playlistDetailType,
   songUrl: songUrlType,
@@ -14,14 +16,15 @@ interface Props {
   pushPlayTracks: Function,
   fetchPlaylistDetail: Function,
   fetchSongUrl: Function,
-  setPlayIndex: Function
+  setPlayIndex: Function,
+  setStatus: Function
 }
 
 interface locationType {
   state: any
 }
 
-export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop, pushPlayTracks, setPlayIndex}: Props) {
+export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop, pushPlayTracks, setStatus}: Props) {
   let location: locationType = useLocation();
   let playlistId: number = location.state.id;
   /* eslint-disable */
@@ -32,27 +35,32 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
   let topInfo;
   let songslist;
 
-  async function playSong (track: any, index: number) {
+  async function playSong (track: any) {
     const songUrlData = await fetchSongUrl(track.id);
-    const songInfo = {
-      id: track.id,
-      name: track.name,
-      picUrl: track.al.picUrl,
-      source: songUrlData.data[0].url,
-      player: track.ar[0].name,
-      dt: track.dt
-    };
-    setSource(songInfo);
-    loadSource();
-    playMusic();
-    pushPlayTracks(songInfo);
+    if (!!songUrlData.data[0].url) {
+      const songInfo = {
+        id: track.id,
+        name: track.name,
+        picUrl: track.al.picUrl,
+        source: songUrlData.data[0].url,
+        player: track.ar[0].name,
+        dt: track.dt
+      };
+      setSource(songInfo);
+      loadSource();
+      playMusic();
+      pushPlayTracks(songInfo);
+      setStatus(true);
+    } else {
+      message.warn('歌曲不存在');
+    }
   }
 
   if (playlistDetail.playlist) {
     let playList = playlistDetail.playlist;
     songslist = playList.tracks.map((track, idx) => {
       return (
-        <div className="table-row" key={track.id} onClick={() => playSong(track, idx)}>
+        <div className="table-row" key={track.id} onClick={() => playSong(track)}>
           <span className="table-cell track-index">{idx + 1}</span>
           <span className="table-cell song-name">{track.name}</span>
           <span className="table-cell song-player">{track.ar[0].name}</span>

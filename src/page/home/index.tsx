@@ -7,13 +7,18 @@ import Rank from '../../page/rank';
 import LeftSide from '../../component/left-side';
 import PlaylistDetail from '../../container/playlist-detail'
 import './style.pcss';
-import {curSongInfo} from '../../types/index';
+import {curSongInfo, songTrack} from '../../types/index';
+import { setSource } from '../../store/actions';
 interface Props {
+  playTracks: Array<songTrack>,
   curSongInfo: curSongInfo,
   playMusic: Function,
-  stopMusic: Function
+  stopMusic: Function,
+  loadSource: Function,
+  setSource: Function,
+  setStatus: Function
 }
-export default function Home({curSongInfo, stopMusic, playMusic}: Props) {
+export default function Home({setStatus, curSongInfo, stopMusic, playMusic, playTracks, loadSource, setSource}: Props) {
   return (
     <div className="home">
       <AppHeader></AppHeader>
@@ -27,7 +32,7 @@ export default function Home({curSongInfo, stopMusic, playMusic}: Props) {
             </Switch>
           </article>
       </main>
-      <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic}></AppFooter>
+      <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} loadSource={loadSource} setSource={setSource} setStatus={setStatus}></AppFooter>
     </div>
   )
 };

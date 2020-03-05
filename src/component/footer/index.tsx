@@ -1,14 +1,20 @@
 import * as React from 'react';
 import './style.pcss';
 import SvgIcon from '../svg-icon';
+import {curSongInfo, songTrack} from '../../types/index';
 
 interface Props {
   status: boolean,
   stopMusic: Function,
   playMusic: Function,
+  loadSource: Function,
+  setSource: Function,
+  curSongInfo: curSongInfo,
+  playTracks: Array<songTrack>,
+  setStatus: Function
 }
 
-function AppHeader ({status, stopMusic, playMusic}: Props) {
+function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, loadSource, setSource}: Props) {
   function switchPlayer () {
     if (status) {
       stopMusic();
@@ -26,9 +32,19 @@ function AppHeader ({status, stopMusic, playMusic}: Props) {
   }
 
   function getCurrentSongIndex () {
+    return playTracks.findIndex(el => el.id === curSongInfo.id);
   }
 
   function playPreSong () {
+    let curSongIdx = getCurrentSongIndex();
+    if (curSongIdx > 0) {
+      if (playTracks[curSongIdx - 1].source) {
+        console.log(playTracks[curSongIdx - 1])
+        setSource(playTracks[curSongIdx - 1]);
+        playMusic();
+        setStatus(true);
+      }
+    }
   }
 
   function playNextSong () {
