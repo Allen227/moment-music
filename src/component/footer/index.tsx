@@ -35,20 +35,27 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     return playTracks.findIndex(el => el.id === curSongInfo.id);
   }
 
-  function playPreSong () {
-    let curSongIdx = getCurrentSongIndex();
+  function playPreSong (curSongIdx: number) {
     if (curSongIdx > 0) {
-      if (playTracks[curSongIdx - 1].source) {
-        console.log(playTracks[curSongIdx - 1])
-        setSource(playTracks[curSongIdx - 1]);
-        playMusic();
-        setStatus(true);
-      }
+      setSource(playTracks[curSongIdx - 1]);
     }
   }
 
-  function playNextSong () {
+  function playNextSong (curSongIdx: number) {
+    if (curSongIdx < playTracks.length - 1) {
+      setSource(playTracks[curSongIdx + 1]);
+    }
+  }
 
+  function controlPreOrNext (type: number) {
+    let curSongIdx = getCurrentSongIndex();
+    if (type === -1) {
+      playPreSong(curSongIdx)
+    } else if (type === 1) {
+      playNextSong(curSongIdx);
+    }
+    playMusic();
+    setStatus(true);
   }
 
   return (
@@ -56,11 +63,11 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
       <div className="footer-bg"></div>
       <div className="footer-container">
         <div className="player-control">
-          <SvgIcon href="iconshangyige" customStyle={nextSongIcon} event={playPreSong}/>
+          <SvgIcon href="iconshangyige" customStyle={nextSongIcon} event={() => controlPreOrNext(-1)}/>
           <div className="play-btn" onClick={switchPlayer}>
             <div className={statusClass.join(' ')}></div>
           </div>
-          <SvgIcon href="iconxiayige" customStyle={nextSongIcon} event={playNextSong}/>
+          <SvgIcon href="iconxiayige" customStyle={nextSongIcon} event={() => controlPreOrNext(1)}/>
         </div>
       </div>
     </footer>
