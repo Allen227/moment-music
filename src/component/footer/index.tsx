@@ -17,8 +17,8 @@ function AppHeader ({status, stopMusic, playMusic}: Props) {
     }
   }
   const nextSongIcon: object = {
-    width: 30,
-    height: 30,
+    width: 32,
+    height: 32,
   }
   let statusClass = ['play-icon'];
   if (status) {
