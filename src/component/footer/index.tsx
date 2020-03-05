@@ -5,7 +5,7 @@ import SvgIcon from '../svg-icon';
 interface Props {
   status: boolean,
   stopMusic: Function,
-  playMusic: Function
+  playMusic: Function,
 }
 
 function AppHeader ({status, stopMusic, playMusic}: Props) {
@@ -25,8 +25,10 @@ function AppHeader ({status, stopMusic, playMusic}: Props) {
     statusClass.push('active')
   }
 
-  function playPreSong () {
+  function getCurrentSongIndex () {
+  }
 
+  function playPreSong () {
   }
 
   function playNextSong () {

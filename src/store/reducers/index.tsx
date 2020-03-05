@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {recommendTags, recommendTagDetail} from './recommend';
 import {playlistDetail, songUrl} from './playlist';
-import audioPlayer from './audio';
+import curSongInfo from './audio';
 import {playTracks} from './base';
 
 export default combineReducers({
@@ -9,6 +9,6 @@ export default combineReducers({
   recommendTagDetail,
   playlistDetail,
   songUrl,
-  audioPlayer,
+  curSongInfo,
   playTracks
 });

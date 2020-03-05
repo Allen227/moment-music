@@ -39,9 +39,10 @@ export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fe
       name: track.name,
       picUrl: track.al.picUrl,
       source: songUrlData.data[0].url,
+      player: track.ar[0].name,
       dt: track.dt
     };
-    setSource(songInfo.source);
+    setSource(songInfo);
     loadSource();
     playMusic();
     pushPlayTracks(songInfo);

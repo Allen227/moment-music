@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch: any) {
     fetchSongUrl: async (songId: number) => await actions.fetchSongUrl(songId),
     playMusic: () => dispatch(actions.playMusic()),
     loadSource: () => dispatch(actions.loadSource()),
-    setSource: (source: string) => dispatch(actions.setSource(source)),
+    setSource: (source: object) => dispatch(actions.setSource(source)),
     setLoop: () => dispatch(actions.setLoop()),
     setPlayIndex: (index: number) => dispatch(actions.setPlayIndex(index)),
     pushPlayTracks: (track: songTrack) => dispatch(actions.pushPlayTracks(track))

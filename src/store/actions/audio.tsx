@@ -22,7 +22,7 @@ export function loadSource () {
 }
 
 
-export function setSource (source: string) {
+export function setSource (source: object) {
   return {
     type: actionTypes.MUSIC_PLAYER.SET_SOURCE,
     payload: source

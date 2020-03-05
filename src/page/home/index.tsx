@@ -7,17 +7,18 @@ import Rank from '../../page/rank';
 import LeftSide from '../../component/left-side';
 import PlaylistDetail from '../../container/playlist-detail'
 import './style.pcss';
+import {curSongInfo} from '../../types/index';
 interface Props {
-  audioPlayer: any,
+  curSongInfo: curSongInfo,
   playMusic: Function,
   stopMusic: Function
 }
-export default function Home({audioPlayer, stopMusic, playMusic}: Props) {
+export default function Home({curSongInfo, stopMusic, playMusic}: Props) {
   return (
     <div className="home">
       <AppHeader></AppHeader>
       <main className="app-main">
-        <LeftSide></LeftSide>
+        <LeftSide curSongInfo={curSongInfo}></LeftSide>
           <article className="container">
             <Switch>
               <Route path="/recommend" component={Recommend}></Route>
@@ -26,7 +27,7 @@ export default function Home({audioPlayer, stopMusic, playMusic}: Props) {
             </Switch>
           </article>
       </main>
-      <AppFooter status={audioPlayer.status} stopMusic={stopMusic} playMusic={playMusic}></AppFooter>
+      <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic}></AppFooter>
     </div>
   )
 };

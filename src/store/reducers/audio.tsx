@@ -1,10 +1,8 @@
 import * as actionTypes  from '../../const/index';
 import audioPlayer from '../../plugin/audioPlayer';
-import {songTrack} from '../../types/index';
 
-function musicPlayer (state: object = {}, action: any) {
+function curSongInfo (state: object = {}, action: any) {
   const audio = audioPlayer.getInstance();
-
 
   switch(action.type) {
     case actionTypes.MUSIC_PLAYER.PLAY_MUSIC:
@@ -14,7 +12,9 @@ function musicPlayer (state: object = {}, action: any) {
       audio.pause();
       return Object.assign({}, state, {status: action.payload});
     case actionTypes.MUSIC_PLAYER.SET_SOURCE:
-      audio.setSrc(action.payload);
+      audio.setSrc(action.payload.source);
+      localStorage.setItem('curSongInfo', JSON.stringify(action.payload));
+      return Object.assign({}, state, action.payload)
     case actionTypes.MUSIC_PLAYER.LOAD_SOURCE:
       audio.load();
     break;
@@ -22,7 +22,10 @@ function musicPlayer (state: object = {}, action: any) {
       return Object.assign({}, state, {playIndex: action.payload});
 
   }
-  return state;
+  const localSongInfo = localStorage.getItem('curSongInfo');
+  if (localSongInfo) {
+    return Object.assign({}, state, JSON.parse(localSongInfo));
+  }
 }
 
-export default musicPlayer;
+export default curSongInfo;
