@@ -15,7 +15,7 @@ function LeftSide ({curSongInfo}: Props) {
     trackList = JSON.parse(historyList).map((track: songTrack) => {
       return (
         <li className="list-item" key={track.id}>
-          <span className="song-name">{track.name}</span>
+          <span className="song-name text-overflow">{track.name}</span>
           <span className="song-time">{parseTime(track.dt)}</span>
         </li>
       )
@@ -43,7 +43,7 @@ function LeftSide ({curSongInfo}: Props) {
       <div className={curSongBoxClass.join(' ')}>
         <img className="music-img" src={curSongInfo.picUrl}></img>
         <div className="music-info">
-          <h3 className="music-title">{curSongInfo.name}</h3>
+          <h3 className="music-title text-overflow">{curSongInfo.name}</h3>
           <span className="music-time">{curSongInfo.player}&nbsp;&nbsp;&nbsp;{parseTime(curSongInfo.dt)}</span>
         </div>
       </div>
