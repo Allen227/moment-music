@@ -69,8 +69,11 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
       clearInterval(timer);
     }
   });
-
+  // slide time-bar for change play time
   function changeSlide (t: any) {
+    setPlayTime(t);
+    stopMusic();
+    audio.setCurrentTime(t);
   }
 
   return (
@@ -86,7 +89,7 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
         </div>
         <div className="slide-bar">
           <span className="slide-time">{parseTime(curPlayTime * 1000)}</span>
-          <Slider onChange={changeSlide} value={curPlayTime} min={0} max={curSongInfo.dt / 1e3} tipFormatter={null} />
+          <Slider onChange={changeSlide} onAfterChange={() => playMusic()} value={curPlayTime} min={0} max={curSongInfo.dt / 1e3} tipFormatter={null}/>
           <span className="slide-time">{parseTime(curSongInfo.dt)}</span>
         </div>
       </div>
