@@ -1,3 +1,5 @@
+import { threadId } from "worker_threads";
+
 /**
  * AudioPlayer
  */
@@ -31,5 +33,11 @@ export default class AudioPlayer {
   }
   public setLoop () {
     this.audio.loop = true;
+  }
+  public getCurrentTime () {
+    return this.audio.currentTime;
+  }
+  public setCurrentTime (time: any) {
+    this.audio.currentTime = time;
   }
 }

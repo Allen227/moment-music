@@ -64,8 +64,24 @@
       }
     }
     .slide-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-left: 100px;
       width: 500px;
+      .ant-slider {
+        flex: 0 0 400px;
+      }
+      .ant-slider-track {
+        background: white;
+      }
+      .ant-slider-rail {
+        background: #c3c3c3;
+      }
+      .slide-time {
+        font-size: var(--fontSmallSize);
+        color: white;
+      }
     }
   }
 }

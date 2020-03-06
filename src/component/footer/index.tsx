@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import './style.pcss';
 import SvgIcon from '../svg-icon';
 import {curSongInfo, songTrack} from '../../types/index';
 import { Slider } from 'antd';
+import audioPlayer from '../../plugin/audioPlayer';
+import parseTime from '../../plugin/parseTime';
 
 interface Props {
   status: boolean,
@@ -16,6 +18,7 @@ interface Props {
 }
 
 function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, loadSource, setSource}: Props) {
+  const audio = audioPlayer.getInstance();
   function switchPlayer () {
     if (status) {
       stopMusic();
@@ -41,13 +44,11 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
       setSource(playTracks[curSongIdx - 1]);
     }
   }
-
   function playNextSong (curSongIdx: number) {
     if (curSongIdx < playTracks.length - 1) {
       setSource(playTracks[curSongIdx + 1]);
     }
   }
-
   function controlPreOrNext (type: number) {
     let curSongIdx = getCurrentSongIndex();
     if (type === -1) {
@@ -57,6 +58,19 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     }
     playMusic();
     setStatus(true);
+  }
+  let [curPlayTime, setPlayTime] = useState(0);
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setPlayTime(audio.getCurrentTime());
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    }
+  });
+
+  function changeSlide (t: any) {
   }
 
   return (
@@ -71,7 +85,9 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
           <SvgIcon href="iconxiayige" customStyle={nextSongIcon} event={() => controlPreOrNext(1)}/>
         </div>
         <div className="slide-bar">
-          <Slider defaultValue={30} />
+          <span className="slide-time">{parseTime(curPlayTime * 1000)}</span>
+          <Slider onChange={changeSlide} value={curPlayTime} min={0} max={curSongInfo.dt / 1e3} tipFormatter={null} />
+          <span className="slide-time">{parseTime(curSongInfo.dt)}</span>
         </div>
       </div>
     </footer>
