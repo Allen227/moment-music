@@ -12,8 +12,8 @@ function curSongInfo (state: object = {}, action: any) {
   switch(action.type) {
     case actionTypes.MUSIC_PLAYER.PLAY_MUSIC:
       // set default song source
-      if (!audio.getSrc() && localSongInfo) {
-        audio.setSrc(parsedSongInfo.source);
+      if (!audio.src && localSongInfo) {
+        audio.src = parsedSongInfo.source;
       }
       audio.play();
       return Object.assign({}, state, {status: action.payload});
@@ -21,7 +21,7 @@ function curSongInfo (state: object = {}, action: any) {
       audio.pause();
       return Object.assign({}, state, {status: action.payload});
     case actionTypes.MUSIC_PLAYER.SET_SOURCE:
-      audio.setSrc(action.payload.source);
+      audio.src = action.payload.source;
       localStorage.setItem('curSongInfo', JSON.stringify(action.payload));
       return Object.assign({}, state, action.payload)
     case actionTypes.MUSIC_PLAYER.LOAD_SOURCE:

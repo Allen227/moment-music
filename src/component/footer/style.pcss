@@ -63,7 +63,7 @@
         }
       }
     }
-    .slide-bar {
+    .time-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -71,6 +71,28 @@
       width: 500px;
       .ant-slider {
         flex: 0 0 400px;
+        margin: 0 auto;
+      }
+      .ant-slider-track {
+        background: white;
+      }
+      .ant-slider-rail {
+        background: #c3c3c3;
+      }
+      .slide-time {
+        white-space: nowrap;
+        font-size: var(--fontSmallSize);
+        color: white;
+      }
+    }
+    .volume-bar {
+      display: flex;
+      align-items: center;
+      margin-left: 100px;
+      width: 150px;
+      cursor: pointer;
+      .ant-slider {
+        flex: 0 0 100px;
         margin: 0 auto;
       }
       .ant-slider-track {

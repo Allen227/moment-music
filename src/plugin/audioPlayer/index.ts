@@ -25,19 +25,25 @@ export default class AudioPlayer {
   public load () {
     this.audio.load();
   }
-  public setSrc (source: string) {
+  public set src (source: string) {
     this.audio.src = source;
   }
-  public getSrc() {
+  public get src() {
     return this.audio.src;
   }
-  public setLoop () {
-    this.audio.loop = true;
+  public set loop (isLoop: boolean) {
+    this.audio.loop = isLoop;
   }
-  public getCurrentTime () {
+  public get currentTime () {
     return this.audio.currentTime;
   }
-  public setCurrentTime (time: any) {
+  public set currentTime (time: number) {
     this.audio.currentTime = time;
+  }
+  public get volume () {
+    return this.audio.volume;
+  }
+  public set volume(volume: number) {
+    this.audio.volume = volume;
   }
 }
