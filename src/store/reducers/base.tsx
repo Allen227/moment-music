@@ -1,5 +1,5 @@
 import * as actionTypes  from '../../const/index';
-import {songTrack} from '../../types/index';
+import {songTrack, requestActionType} from '../../types/index';
 
 const playTracks = function (state: Array<object> = [], action: any) {
   const localTracks = localStorage.getItem('songTracks');
@@ -28,6 +28,15 @@ const playTracks = function (state: Array<object> = [], action: any) {
   return state;
 }
 
+const songUrl = (state: object = {}, action: requestActionType): object => {
+  switch (action.type) {
+    case actionTypes.FETCH_SONG_URL.SUCCESS:
+      return Object.assign({}, state, action.payload);
+  }
+  return state;
+};
+
 export {
-  playTracks
+  playTracks,
+  songUrl
 }

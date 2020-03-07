@@ -35,4 +35,6 @@ function curSongInfo (state: object = {}, action: any) {
   return Object.assign({}, state, parsedSongInfo);
 }
 
-export default curSongInfo;
+export {
+  curSongInfo
+}
