@@ -3,8 +3,7 @@ import './style.pcss';
 import SvgIcon from '../svg-icon';
 import {curSongInfo, songTrack} from '../../types/index';
 import { Slider } from 'antd';
-import audioPlayer from '../../plugin/audioPlayer';
-import parseTime from '../../plugin/parseTime';
+import {audioPlayer, parseTime} from '../../plugin/index';
 
 interface Props {
   status: boolean,
@@ -55,7 +54,11 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     } else {
       const songUrlData = await fetchSongUrl(curSongInfo.id);
       curSongInfo.source = songUrlData.data[0].url;
+      const prePlayTime = Math.round(parseInt(localStorage.currentTime));
+      slideTimeEnd();
       setSource(curSongInfo);
+      setPlayTime(prePlayTime);
+      audio.currentTime = prePlayTime;
       playMusic();
     }
   }
@@ -87,17 +90,16 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
   }
   function setTimer () {
     timer = setInterval(() => {
+      localStorage.currentTime = audio.currentTime;
       setPlayTime(audio.currentTime);
     }, 1000);
   }
   // slide time-bar for change play time
   function changeSlide (time: any) {
-    clearInterval(timer);
     setPlayTime(time);
   }
   function slideTimeEnd () {
     audio.currentTime = curPlayTime;
-    setTimer();
   }
   // set volume of music
   function changeVolumn (volume: any) {
