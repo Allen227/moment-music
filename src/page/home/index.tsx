@@ -5,9 +5,9 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import Recommend from '../../container/recommend/index';
 import Rank from '../../page/rank';
 import LeftSide from '../../component/left-side';
-import PlaylistDetail from '../../container/playlist-detail'
 import './style.pcss';
 import {curSongInfo, songTrack} from '../../types/index';
+import PlaylistDetail from '../../container/playlist-detail';
 interface Props {
   playTracks: Array<songTrack>,
   curSongInfo: curSongInfo,
@@ -27,9 +27,9 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
           <article className="container">
             <Switch>
               <Redirect from="/" exact to="/recommend" />
-              <Route path="/recommend" component={Recommend}></Route>
-              <Route path="/rank" component={Rank}></Route>
-              <Route path="/playlist-detail" component={PlaylistDetail}></Route>
+              <Route path="/recommend" component={Recommend} exact></Route>
+              <Route path={`/recommend/playlist-detail`} component={PlaylistDetail}></Route>
+              <Route path="/rank" component={Rank} exact></Route>
             </Switch>
           </article>
       </main>

@@ -13,6 +13,7 @@ interface Props {
 export default function Recommend({recommendTags, recommendTagDetail, fetchRemmendTags, fetchRecommendDetail}: Props) {
   let [activeTag, setActiveTag] = useState('华语');
   let recommendBox;
+
   /* eslint-disable */
   useEffect(() => {
     if (recommendTags.code === void 0) {
@@ -45,11 +46,13 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
     )
   }
   return (
-    <div className="recommend">
-        <ul className="tags-list">
-          {recommendBox}
-        </ul>
-      {BoxListDom}
-    </div>
+    <React.Fragment>
+      <div className="recommend">
+          <ul className="tags-list">
+            {recommendBox}
+          </ul>
+        {BoxListDom}
+      </div>
+    </React.Fragment>
   )
 }

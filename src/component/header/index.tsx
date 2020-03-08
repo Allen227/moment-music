@@ -12,10 +12,10 @@ class AppHeader extends React.Component {
             <h1 className="app-title">MOMENT</h1>
           </NavLink>
           <ul className="menu-list">
-            <NavLink to="recommend" className="menu-item" activeClassName="active">
+            <NavLink to="/recommend" className="menu-item" activeClassName="active">
               <li>推荐</li>
             </NavLink>
-            <NavLink to="rank" className="menu-item" activeClassName="active">
+            <NavLink to="/rank" className="menu-item" activeClassName="active">
               <li>排行榜</li>
             </NavLink>
           </ul>

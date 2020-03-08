@@ -1,6 +1,6 @@
 import React from 'react';
 import {recommendTagDetailType} from '../../../../types';
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { Scrollbars } from 'react-custom-scrollbars';
 import './style.pcss';
 
@@ -10,10 +10,11 @@ interface Props {
 
 export default function BoxList({recommendTagDetail}: Props) {
   let history = useHistory();
+  let { url } = useRouteMatch();
 
   function jumpDetail (playlistId: number) {
     history.push({
-      pathname: '/playlist-detail',
+      pathname: `${url}/playlist-detail`,
       state: {
         id: playlistId
       }
