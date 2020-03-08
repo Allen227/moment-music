@@ -23,7 +23,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
     <div className="home">
       <AppHeader></AppHeader>
       <main className="app-main">
-        <LeftSide curSongInfo={curSongInfo}></LeftSide>
+        <LeftSide curSongInfo={curSongInfo} playMusic={playMusic} loadSource={loadSource} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></LeftSide>
           <article className="container">
             <Switch>
               <Redirect from="/" exact to="/recommend" />
