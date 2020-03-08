@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AppHeader from '../../component/header';
 import AppFooter from '../../component/footer';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import Recommend from '../../container/recommend/index';
 import Rank from '../../page/rank';
 import LeftSide from '../../component/left-side';
@@ -26,6 +26,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
         <LeftSide curSongInfo={curSongInfo}></LeftSide>
           <article className="container">
             <Switch>
+              <Redirect from="/" exact to="/recommend" />
               <Route path="/recommend" component={Recommend}></Route>
               <Route path="/rank" component={Rank}></Route>
               <Route path="/playlist-detail" component={PlaylistDetail}></Route>

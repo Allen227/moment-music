@@ -35,7 +35,10 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     height: 20
   }
   useEffect(() => {
-    setTimer();
+    timer = setInterval(() => {
+      localStorage.currentTime = audio.currentTime;
+      setPlayTime(audio.currentTime);
+    }, 1000);
     return () => {
       clearInterval(timer);
     }
@@ -88,14 +91,9 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     playMusic();
     setStatus(true);
   }
-  function setTimer () {
-    timer = setInterval(() => {
-      localStorage.currentTime = audio.currentTime;
-      setPlayTime(audio.currentTime);
-    }, 1000);
-  }
   // slide time-bar for change play time
   function changeSlide (time: any) {
+    clearInterval(timer);
     setPlayTime(time);
   }
   function slideTimeEnd () {
