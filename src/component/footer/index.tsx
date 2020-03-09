@@ -11,7 +11,6 @@ interface Props {
   playTracks: Array<songTrack>,
   stopMusic: Function,
   playMusic: Function,
-  loadSource: Function,
   setSource: Function,
   setStatus: Function,
   fetchSongUrl: Function
@@ -24,8 +23,8 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     statusClass.push('active')
   }
   let [volume, setVolume] = useState(audio.volume * 100);
-  let [curPlayTime, setPlayTime] = useState(0);
-  let timer: any;
+  let [curPlayTime, setPlayTime] = useState(audio.currentTime);
+  let [isMove, setMoveStatus] = useState(false);
   const nextSongIcon: object = {
     width: 32,
     height: 32,
@@ -34,17 +33,13 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     width: 20,
     height: 20
   }
-  useEffect(() => {
-    timer = setInterval(() => {
-      localStorage.currentTime = audio.currentTime;
-      setPlayTime(audio.currentTime);
-    }, 1000);
-    return () => {
-      clearInterval(timer);
+  // listen audio time
+  audio.ontimeupdate = function (timeupdate: any) {
+    if (!isMove) {
+      setPlayTime(timeupdate.path[0].currentTime);
     }
-  }, []);
-  
-  // initial
+  }
+  // initial effect
   useEffect(() => {
     // initial volume
     audio.volume = 0.25;
@@ -57,11 +52,8 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     } else {
       const songUrlData = await fetchSongUrl(curSongInfo.id);
       curSongInfo.source = songUrlData.data[0].url;
-      const prePlayTime = Math.round(parseInt(localStorage.currentTime));
-      slideTimeEnd();
       setSource(curSongInfo);
-      setPlayTime(prePlayTime);
-      audio.currentTime = prePlayTime;
+      slideTimeEnd(curPlayTime);
       playMusic();
     }
   }
@@ -91,15 +83,16 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     playMusic();
     setStatus(true);
   }
-  // slide time-bar for change play time
-  function changeSlide (time: any) {
-    clearInterval(timer);
+  function slideTime (time: any) {
+    setMoveStatus(true);
     setPlayTime(time);
   }
-  function slideTimeEnd () {
-    audio.currentTime = curPlayTime;
+  function slideTimeEnd (time: any) {
+    setMoveStatus(false);
+    setPlayTime(time);
+    audio.currentTime = time;
   }
-  // set volume of music
+  // set volume
   function changeVolumn (volume: any) {
     setVolume(volume);
     audio.volume = volume / 100;
@@ -118,7 +111,7 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
         </div>
         <div className="time-bar">
           <span className="slide-time">{parseTime(curPlayTime * 1000)}</span>
-          <Slider onChange={changeSlide} onAfterChange={() => slideTimeEnd()} value={curPlayTime} min={0} max={Math.round(curSongInfo.dt / 1e3)} tipFormatter={null}/>
+          <Slider onChange={slideTime} onAfterChange={slideTimeEnd} value={curPlayTime} min={0} max={Math.round(curSongInfo.dt / 1e3)} tipFormatter={null}/>
           <span className="slide-time">{parseTime(curSongInfo.dt)}</span>
         </div>
         <div className="volume-bar">

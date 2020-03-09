@@ -33,7 +33,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
             </Switch>
           </article>
       </main>
-      <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} loadSource={loadSource} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></AppFooter>
+      <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></AppFooter>
     </div>
   )
 };
