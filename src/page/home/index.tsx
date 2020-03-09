@@ -3,7 +3,7 @@ import AppHeader from '../../component/header';
 import AppFooter from '../../component/footer';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import Recommend from '../../container/recommend/index';
-import Rank from '../../page/rank';
+import Rank from '../../container/rank/index';
 import LeftSide from '../../component/left-side';
 import './style.pcss';
 import {curSongInfo, songTrack} from '../../types/index';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import {recommendTagsType, recommendTagDetailType, TagsType} from '../../types';
-import BoxList from '../recommend/components/box-list';
+import BoxList from '../../component/box-list';
 import './style.pcss';
 
 interface Props {
@@ -42,17 +42,15 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
   let BoxListDom;
   if (Object.keys(recommendTagDetail).length > 0) {
     BoxListDom = (
-      <BoxList recommendTagDetail={recommendTagDetail}/>
+      <BoxList recommendList={recommendTagDetail.playlists} type="recommend"/>
     )
   }
   return (
-    <React.Fragment>
-      <div className="recommend">
-          <ul className="tags-list">
-            {recommendBox}
-          </ul>
-        {BoxListDom}
-      </div>
-    </React.Fragment>
+    <div className="recommend">
+        <ul className="tags-list">
+          {recommendBox}
+        </ul>
+      {BoxListDom}
+    </div>
   )
 }

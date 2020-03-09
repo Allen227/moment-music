@@ -3,6 +3,7 @@ import {recommendTags, recommendTagDetail} from './recommend';
 import {playlistDetail} from './playlist';
 import {curSongInfo} from './audio';
 import {playTracks, songUrl} from './base';
+import {rankList} from './rank';
 
 export default combineReducers({
   recommendTags,
@@ -10,5 +11,6 @@ export default combineReducers({
   playlistDetail,
   songUrl,
   curSongInfo,
-  playTracks
+  playTracks,
+  rankList
 });

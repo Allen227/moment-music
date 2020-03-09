@@ -1,9 +1,27 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
+import {rankListType} from '../../types/index';
+import BoxList from '../../component/box-list'
+import './style.pcss';
 
-export default function Recommend() {
+interface Props {
+  fetchRankList: Function,
+  rankList: rankListType
+}
+
+export default function Recommend({fetchRankList, rankList}: Props) {
+  // fetch rank list
+  useEffect(() => {
+    fetchRankList();
+  }, []);
+  let rankDom;
+  if (rankList && rankList.list) {
+    rankDom = (
+      <BoxList rankList={rankList.list} type="rank"/>
+    )
+  }
   return (
-    <div className="recommend">
-      <h1>Rank</h1>
+    <div className="rank">
+      {rankDom}
     </div>
   )
 };
