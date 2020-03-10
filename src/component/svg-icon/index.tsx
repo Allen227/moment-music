@@ -3,7 +3,7 @@ import './style.pcss';
 
 interface Props {
   href: string,
-  customStyle: object,
+  customStyle?: object,
   event: Function
 }
 

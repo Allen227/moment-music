@@ -3,6 +3,7 @@ import './style.pcss';
 import {songTrack, curSongInfo} from '../../types/index';
 import parseTime from '../../plugin/parseTime';
 import { Scrollbars } from 'react-custom-scrollbars';
+import SvgIcon from '../../component/svg-icon';
 import {message} from 'antd';
 interface Props {
   curSongInfo: curSongInfo,
@@ -57,7 +58,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
   }
   return (
     <aside className="left-side">
-      <h2 className="title">历史记录</h2>
+      <h2 className="title">播放列表</h2>
       <div className="track-container" style={playListStyle}>
         <Scrollbars style={{ width: '100%', height: '100%' }} autoHide>
           <ul className="track-list">
@@ -66,6 +67,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
         </Scrollbars>
       </div>
       <div className={curSongBoxClass.join(' ')}>
+        <SvgIcon href="iconfangda" event={() => {}}/>
         <img className="music-img" src={curSongInfo.picUrl}></img>
         <div className="music-info">
           <h3 className="music-title text-overflow">{curSongInfo.name}</h3>

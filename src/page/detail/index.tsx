@@ -3,7 +3,7 @@ import {useLocation} from 'react-router-dom';
 import {playlistDetailType, songUrlType, songTrack} from '../../types/index';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
-import parseTime from '../../plugin//parseTime';
+import parseTime from '../../plugin/parseTime';
 import { message } from 'antd';
 
 interface Props {
