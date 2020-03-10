@@ -5,6 +5,7 @@ import parseTime from '../../plugin/parseTime';
 import { Scrollbars } from 'react-custom-scrollbars';
 import SvgIcon from '../../component/svg-icon';
 import {message} from 'antd';
+import {useHistory} from 'react-router-dom';
 interface Props {
   curSongInfo: curSongInfo,
   playMusic: Function,
@@ -17,6 +18,7 @@ interface Props {
 function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus, playMusic}: Props) {
   const historyList = localStorage.getItem('songTracks');
   let trackList;
+  const history = useHistory();
   /**
    * play current song
    * @param track the song information that will play
@@ -60,6 +62,14 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
       height: 'calc(100% - 40px)'
     }
   }
+  function jumpSongPage () {
+    history.push({
+      pathname: '/song',
+      state: {
+        id: curSongInfo.id
+      }
+    })
+  }
   return (
     <aside className="left-side">
       <h2 className="title">播放列表</h2>
@@ -71,7 +81,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
         </Scrollbars>
       </div>
       <div className={curSongBoxClass.join(' ')}>
-        <SvgIcon href="iconfangda" event={() => {}}/>
+        <SvgIcon href="iconfangda" event={jumpSongPage}/>
         <img className="music-img" src={curSongInfo.picUrl}></img>
         <div className="music-info">
           <h3 className="music-title text-overflow">{curSongInfo.name}</h3>

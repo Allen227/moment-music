@@ -1,9 +1,16 @@
 import React from 'react';
+import {useLocation} from 'react-router-dom';
 
-function song () {
-  return (
-    <div></div>
-  )
+interface locationType {
+  state: any
 }
 
-export default song;
+export default function Song () {
+  let location: locationType = useLocation();
+  const songId = location.state.id;
+  return (
+    <div>
+      <h1>song</h1>
+    </div>
+  )
+}

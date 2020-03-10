@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
-import {playlistDetailType, songUrlType, songTrack} from '../../types/index';
+import {playlistDetailType, songUrlType} from '../../types/index';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
 import parseTime from '../../plugin/parseTime';
@@ -24,7 +24,7 @@ interface locationType {
   state: any
 }
 
-export default function PlaylistDetail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop, pushPlayTracks, setStatus}: Props) {
+export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop, pushPlayTracks, setStatus}: Props) {
   let location: locationType = useLocation();
   let playlistId: number = location.state.id;
   /* eslint-disable */
