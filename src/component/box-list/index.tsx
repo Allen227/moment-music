@@ -12,7 +12,7 @@ interface Props {
 
 export default function BoxList({recommendList, rankList, type}: Props) {
   let history = useHistory();
-
+  // set router according to type
   function jumpDetail (id: number) {
     let jumpObj;
     jumpObj = {
@@ -23,6 +23,7 @@ export default function BoxList({recommendList, rankList, type}: Props) {
     }
     history.push(jumpObj)
   }
+  // set render data according to type
   let boxListArr: Array<any> = [];
   if (recommendList && type === 'recommend') {
     boxListArr = recommendList;

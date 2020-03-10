@@ -17,7 +17,10 @@ interface Props {
 function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus, playMusic}: Props) {
   const historyList = localStorage.getItem('songTracks');
   let trackList;
-
+  /**
+   * play current song
+   * @param track the song information that will play
+   */
   async function playCurSong (track: any) {
     const songUrlData = await fetchSongUrl(track.id);
     if (!!songUrlData.data[0].url) {
@@ -37,6 +40,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
       message.warn('歌曲不存在');
     }
   }
+  // get tracks node when historyList is valid
   if (historyList) {
     trackList = JSON.parse(historyList).map((track: songTrack) => {
       return (

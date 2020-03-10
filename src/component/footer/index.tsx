@@ -45,7 +45,9 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     audio.volume = 0.25;
     setVolume(audio.volume * 100);
   }, [])
-
+  /**
+   * control player
+   */
   async function switchPlayer () {
     if (status) {
       stopMusic();
@@ -57,16 +59,25 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
       playMusic();
     }
   }
-
+  /**
+   * get index of current song from song tracks
+   */
   function getCurrentSongIndex () {
     return playTracks.findIndex(el => el.id === curSongInfo.id);
   }
-
+  /**
+   * play pre song
+   * @param curSongIdx current index of song
+   */
   function playPreSong (curSongIdx: number) {
     if (curSongIdx > 0) {
       setSource(playTracks[curSongIdx - 1]);
     }
   }
+  /**
+   * play next song
+   * @param curSongIdx current index of song
+   */
   function playNextSong (curSongIdx: number) {
     if (curSongIdx < playTracks.length - 1) {
       setSource(playTracks[curSongIdx + 1]);
@@ -83,10 +94,18 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     playMusic();
     setStatus(true);
   }
+  /**
+   * set value that is slide bar of time
+   * @param time select time
+   */
   function slideTime (time: any) {
     setMoveStatus(true);
     setPlayTime(time);
   }
+  /**
+   * slide end event
+   * @param time time that is slide end
+   */
   function slideTimeEnd (time: any) {
     setMoveStatus(false);
     setPlayTime(time);

@@ -24,10 +24,15 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
     }
   }, [recommendTags.code]);
 
+  /**
+   * select tag
+   * @param selectedTag select information of tag
+   */
   function selectTag (selectedTag: TagsType) {
     setActiveTag(selectedTag.name);
     fetchRecommendDetail(selectedTag.name);
   }
+  // set tag DOM
   if (recommendTags && recommendTags.tags) {
     recommendBox = recommendTags.tags.map((item) =>{
       let tabClass = ['tag'];
@@ -39,6 +44,7 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
       )
     })
   }
+  // set node of recommend list
   let BoxListDom;
   if (Object.keys(recommendTagDetail).length > 0) {
     BoxListDom = (

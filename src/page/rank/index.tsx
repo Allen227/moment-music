@@ -13,6 +13,7 @@ export default function Recommend({fetchRankList, rankList}: Props) {
   useEffect(() => {
     fetchRankList();
   }, []);
+  // set node of rank list
   let rankDom;
   if (rankList && rankList.list) {
     rankDom = (

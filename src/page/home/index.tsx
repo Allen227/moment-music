@@ -4,6 +4,7 @@ import AppFooter from '../../component/footer';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import Recommend from '../../container/recommend/index';
 import Rank from '../../container/rank/index';
+import Song from '../../container/song/index';
 import LeftSide from '../../component/left-side';
 import './style.pcss';
 import {curSongInfo, songTrack} from '../../types/index';
@@ -31,6 +32,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
               <Route path={`/recommend/detail`} component={Detail}></Route>
               <Route path={`/rank/detail`} component={Detail}></Route>
               <Route path="/rank" component={Rank} exact></Route>
+              <Route path="/song" component={Song} exact></Route>
             </Switch>
           </article>
       </main>
