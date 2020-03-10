@@ -1,6 +1,6 @@
 import React from 'react';
 import {detailType, rankItemType} from '../../types';
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Scrollbars } from 'react-custom-scrollbars';
 import './style.pcss';
 
@@ -12,15 +12,16 @@ interface Props {
 
 export default function BoxList({recommendList, rankList, type}: Props) {
   let history = useHistory();
-  let { url } = useRouteMatch();
 
-  function jumpDetail (playlistId: number) {
-    history.push({
-      pathname: `${url}/playlist-detail`,
+  function jumpDetail (id: number) {
+    let jumpObj;
+    jumpObj = {
+      pathname: `${type}/detail`,
       state: {
-        id: playlistId
+        id
       }
-    })
+    }
+    history.push(jumpObj)
   }
   let boxListArr: Array<any> = [];
   if (recommendList && type === 'recommend') {
@@ -33,7 +34,7 @@ export default function BoxList({recommendList, rankList, type}: Props) {
     return (
       <li className="box-item" key={item.id} onClick={() => jumpDetail(item.id)}>
         <div className="img-box">
-          <img className="img" src={item.coverImgUrl} alt="playlist-cover"/>
+          <img className="img" src={item.coverImgUrl} alt="box-cover"/>
         </div>
         <div className="box-title">{item.name}</div>
       </li>

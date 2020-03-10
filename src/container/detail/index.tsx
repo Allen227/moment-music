@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import PlaylistDetail from '../../page/playlist-detail/index';
+import Detail from '../../page/detail/index';
 import * as actions from '../../store/actions';
 import {songTrack} from '../../types/index';
 
@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch: any) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);

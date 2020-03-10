@@ -7,7 +7,7 @@ import Rank from '../../container/rank/index';
 import LeftSide from '../../component/left-side';
 import './style.pcss';
 import {curSongInfo, songTrack} from '../../types/index';
-import PlaylistDetail from '../../container/playlist-detail';
+import Detail from '../../container/detail';
 interface Props {
   playTracks: Array<songTrack>,
   curSongInfo: curSongInfo,
@@ -28,7 +28,8 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
             <Switch>
               <Redirect from="/" exact to="/recommend" />
               <Route path="/recommend" component={Recommend} exact></Route>
-              <Route path={`/recommend/playlist-detail`} component={PlaylistDetail}></Route>
+              <Route path={`/recommend/detail`} component={Detail}></Route>
+              <Route path={`/rank/detail`} component={Detail}></Route>
               <Route path="/rank" component={Rank} exact></Route>
             </Switch>
           </article>
