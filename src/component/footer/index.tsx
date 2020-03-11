@@ -13,14 +13,15 @@ interface Props {
   playMusic: Function,
   setSource: Function,
   setStatus: Function,
-  fetchSongUrl: Function
+  fetchSongUrl: Function,
+  fetchSongWord: Function
 }
 
-function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, fetchSongUrl, setSource}: Props) {
+function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, fetchSongUrl, setSource, fetchSongWord}: Props) {
   const audio = audioPlayer.getInstance();
   let statusClass = ['play-icon'];
   if (status) {
-    statusClass.push('active')
+    statusClass.push('active');
   }
   let [volume, setVolume] = useState(audio.volume * 100);
   let [curPlayTime, setPlayTime] = useState(audio.currentTime);
@@ -40,11 +41,16 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
     }
   }
   // initial effect
+  /* eslint-disable */
   useEffect(() => {
     // initial volume
     audio.volume = 0.25;
     setVolume(audio.volume * 100);
   }, [])
+  /* eslint-disable */
+  useEffect(() => {
+    fetchSongWord(curSongInfo.id);
+  }, [curSongInfo]);
   /**
    * control player
    */

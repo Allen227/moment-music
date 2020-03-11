@@ -2,7 +2,7 @@ import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
 import * as actions from '../../const';
 import server from '../../server/api';
-import {requestActionType, playlistDetailType, songTrack} from '../../types/index';
+import {requestActionType, playlistDetailType} from '../../types/index';
 
 const fetchPlaylistDetailSuccess = (payload: playlistDetailType): requestActionType => {
   return {

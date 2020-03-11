@@ -82,7 +82,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
       </div>
       <div className={curSongBoxClass.join(' ')}>
         <SvgIcon href="iconfangda" event={jumpSongPage}/>
-        <img className="music-img" src={curSongInfo.picUrl}></img>
+        <img className="music-img" src={curSongInfo.picUrl} alt="song-cover"></img>
         <div className="music-info">
           <h3 className="music-title text-overflow">{curSongInfo.name}</h3>
           <span className="music-time">{curSongInfo.player}&nbsp;&nbsp;&nbsp;{parseTime(curSongInfo.dt)}</span>

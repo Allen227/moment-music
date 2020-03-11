@@ -10,6 +10,7 @@ interface Props {
 
 export default function Recommend({fetchRankList, rankList}: Props) {
   // fetch rank list
+  /* eslint-disable */
   useEffect(() => {
     fetchRankList();
   }, []);

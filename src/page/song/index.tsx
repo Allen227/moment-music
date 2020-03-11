@@ -16,6 +16,7 @@ export default function Song ({fetchSongWord, songWord}: Props) {
   let location: locationType = useLocation();
   const songId = location.state.id;
   // fetch song word
+  /* eslint-disable */
   useEffect(() => {
     fetchSongWord(songId);
   }, []);

@@ -17,9 +17,10 @@ interface Props {
   loadSource: Function,
   setSource: Function,
   setStatus: Function,
-  fetchSongUrl: Function
+  fetchSongUrl: Function,
+  fetchSongWord: Function
 }
-export default function Home({setStatus, curSongInfo, stopMusic, playMusic, playTracks, loadSource, setSource, fetchSongUrl}: Props) {
+export default function Home({setStatus, curSongInfo, stopMusic, playMusic, playTracks, loadSource, setSource, fetchSongUrl, fetchSongWord}: Props) {
   return (
     <div className="home">
       <AppHeader></AppHeader>
@@ -36,7 +37,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
             </Switch>
           </article>
       </main>
-      <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></AppFooter>
+      <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl} fetchSongWord={fetchSongWord}></AppFooter>
     </div>
   )
 };
