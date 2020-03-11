@@ -2,6 +2,7 @@ import {fetchRemmendTags, fetchRecommendDetail} from './recommend';
 import {fetchPlaylistDetail, fetchSongUrl} from './playlist';
 import {playMusic, stopMusic, loadSource, setSource, setLoop, setPlayIndex, setStatus} from './audio';
 import {fetchRankList} from './rank';
+import {fetchSongWord} from './song';
 import {pushPlayTracks} from './base';
 
 export {
@@ -17,5 +18,6 @@ export {
   setLoop,
   setPlayIndex,
   setStatus,
-  fetchRankList
+  fetchRankList,
+  fetchSongWord
 };

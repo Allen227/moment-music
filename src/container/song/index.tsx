@@ -7,8 +7,7 @@ function mapStateToProps(state: object) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchRemmendTags: () => dispatch(actions.fetchRemmendTags()),
-    fetchRecommendDetail: (cat: string) => dispatch(actions.fetchRecommendDetail(cat))
+    fetchSongWord: (songId: number) => dispatch(actions.fetchSongWord(songId))
   }
 };
 

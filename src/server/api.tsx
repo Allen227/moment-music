@@ -1,6 +1,6 @@
 import req from './request';
 
-const server_url: string = `http://192.168.124.6:3000`;
+const server_url: string = `http://localhost:3000`;
 
 const Api = {
   fetch_recommend_tags: () => req(`${server_url}/playlist/hot`, 'GET'),
