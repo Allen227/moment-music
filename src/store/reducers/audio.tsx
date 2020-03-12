@@ -35,15 +35,6 @@ function curSongInfo (state: object = {}, action: any) {
   return Object.assign({}, state, parsedSongInfo);
 }
 
-function currentTime(state: number = 0, action: any) {
-  switch(action.type) {
-    case actionTypes.MUSIC_PLAYER.CURRENT_TIME:
-      return Object.assign({}, state, {status: action.payload});
-  }
-  return state;
-}
-
 export {
-  curSongInfo,
-  currentTime
+  curSongInfo
 }

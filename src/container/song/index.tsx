@@ -7,7 +7,7 @@ function mapStateToProps(state: object) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchSongWord: (songId: number) => dispatch(actions.fetchSongWord(songId))
+    fetchLyric: (songId: number) => dispatch(actions.fetchLyric(songId))
   }
 };
 

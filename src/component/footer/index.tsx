@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './style.pcss';
 import SvgIcon from '../svg-icon';
 import {curSongInfo, songTrack} from '../../types/index';
 import { Slider } from 'antd';
 import {audioPlayer, parseTime} from '../../plugin/index';
+import {currentTimeContext} from '../../plugin/currentTimeContext';
 
 interface Props {
   status: boolean,
@@ -14,10 +15,10 @@ interface Props {
   setSource: Function,
   setStatus: Function,
   fetchSongUrl: Function,
-  fetchSongWord: Function
+  fetchLyric: Function
 }
 
-function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, fetchSongUrl, setSource, fetchSongWord}: Props) {
+function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, fetchSongUrl, setSource, fetchLyric}: Props) {
   const audio = audioPlayer.getInstance();
   let statusClass = ['play-icon'];
   if (status) {
@@ -26,6 +27,7 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
   let [volume, setVolume] = useState(audio.volume * 100);
   let [curPlayTime, setPlayTime] = useState(audio.currentTime);
   let [isMove, setMoveStatus] = useState(false);
+  let timeContext = useContext(currentTimeContext);
   const nextSongIcon: object = {
     width: 32,
     height: 32,
@@ -37,7 +39,9 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
   // listen audio time
   audio.ontimeupdate = function (timeupdate: any) {
     if (!isMove) {
-      setPlayTime(timeupdate.path[0].currentTime);
+      const currentTime = timeupdate.path[0].currentTime;
+      setPlayTime(currentTime);
+      timeContext.update(currentTime);
     }
   }
   // initial effect
@@ -49,8 +53,8 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
   }, [])
   /* eslint-disable */
   useEffect(() => {
-    fetchSongWord(curSongInfo.id);
-  }, [curSongInfo]);
+    fetchLyric(curSongInfo.id);
+  }, [curSongInfo.id]);
   /**
    * control player
    */

@@ -14,7 +14,7 @@ export function mapDispatchToProps(dispatch: any) {
     playMusic: () => dispatch(actions.playMusic()),
     setStatus: (status: boolean) => dispatch(actions.setStatus(status)),
     fetchSongUrl: async (songId: number) => await actions.fetchSongUrl(songId),
-    fetchSongWord: (songId: number) => dispatch(actions.fetchSongWord(songId))
+    fetchLyric: (songId: number) => dispatch(actions.fetchLyric(songId))
   };
 };
 

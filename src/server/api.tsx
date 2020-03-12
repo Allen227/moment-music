@@ -8,7 +8,7 @@ const Api = {
   fetch_playlist_detail: (playlistId: number) => req(`${server_url}/playlist/detail?id=${playlistId}`, 'GET'),
   fetch_song_url: (songId: number) => req(`${server_url}/song/url?id=${songId}`, 'GET'),
   fetch_rank_list: () => req(`${server_url}/toplist`, 'GET'),
-  fetch_song_word: (songId: number) => req(`${server_url}/lyric?id=${songId}`, 'GET')
+  fetch_lyric: (songId: number) => req(`${server_url}/lyric?id=${songId}`, 'GET')
 }
 
 export default Api;
