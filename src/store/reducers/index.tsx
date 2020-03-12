@@ -4,7 +4,7 @@ import {playlistDetail} from './playlist';
 import {curSongInfo} from './audio';
 import {playTracks, songUrl} from './base';
 import {rankList} from './rank';
-import {songWord} from './song';
+import {lyricData} from './song';
 
 export default combineReducers({
   recommendTags,
@@ -14,5 +14,5 @@ export default combineReducers({
   curSongInfo,
   playTracks,
   rankList,
-  songWord
+  lyricData
 });

@@ -12,10 +12,33 @@ interface locationType {
 interface Props {
   currentTime: number,
   fetchLyric: Function,
-  songWord: any
+  lyricData: any
 }
 
-export default function Song ({fetchLyric, songWord}: Props) {
+let parsedResult: any = [];
+// get current line that is active of lyric
+const getActiveIndex = (function () {
+  let preIndex = 0;
+  return function getActiveIndex (search: string) {
+    let index = 0;
+    let resultIndex: number | undefined = void 0;
+    for (let currentLine of parsedResult) {
+      if (currentLine.time.includes(search)) {
+        resultIndex = index;
+        break;
+      }
+      index++;
+    }
+    if (resultIndex === void 0) {
+      resultIndex = preIndex;
+    } else {
+      preIndex = resultIndex;
+    }
+    return resultIndex;
+  }
+})();
+
+export default function Song ({fetchLyric, lyricData}: Props) {
   let location: locationType = useLocation();
   let timeContext = useContext(currentTimeContext);
   const songId = location.state.id;
@@ -24,18 +47,19 @@ export default function Song ({fetchLyric, songWord}: Props) {
   useEffect(() => {
     fetchLyric(songId);
   }, []);
-  let wordStr: string = '';
-  if (songWord && songWord.lrc) {
-    wordStr = songWord.lrc.lyric;
+  let lyricStr: string = '';
+  if (lyricData && lyricData.lrc) {
+    lyricStr = lyricData.lrc.lyric;
   }
-  let parsedResult: any = [];
+  // initial parsedResult
+  parsedResult = [];
   /** parse lyric **/
   parsedResult = (function parseWord() {
     // split string for get LYRIC array
-    const wordArr = wordStr.split('\n');
+    const lyricArr = lyricStr.split('\n');
     let matchInfo: any = [];
     // listen audio time
-    wordArr.map(line => {
+    lyricArr.map(line => {
       matchInfo = line.match(/\[\d{2}:\d{2}.(\d{2}|\d{3})\]/);
       if (matchInfo) {
         // push into result stack
@@ -47,20 +71,19 @@ export default function Song ({fetchLyric, songWord}: Props) {
     });
     return parsedResult;
   })();
-  // get current line that is active of lyric
   // get node of lyric
-  let songWordDom = parsedResult.map((word: wordType, index: number) => {
-    const wordStyle = ['word-item'];
-    if (word.time.includes(parseTime(timeContext.value * 1e3))) {
-      wordStyle.push('active');
+  let lyricDom = parsedResult.map((word: wordType, index: number) => {
+    const lyricStyle = ['word-item'];
+    if (getActiveIndex(parseTime(timeContext.value * 1e3)) === index) {
+      lyricStyle.push('active');
     }
     return (
-      <li className={wordStyle.join(' ')} key={word.time}>{word.value}</li>
+      <li className={lyricStyle.join(' ')} key={index}>{word.value}</li>
     )
   })
   return (
     <div>
-      <ul className="word-list">{songWordDom}</ul>
+      <ul className="word-list">{lyricDom}</ul>
     </div>
   )
 }
