@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import AppHeader from '../../component/header';
-import AppFooter from '../../component/footer';
 import {Route, Switch, Redirect, useRouteMatch} from 'react-router-dom';
-import Recommend from '../../container/recommend/index';
+import AppHeader from './component/header';
+import AppFooter from './component/footer';
+import LeftSide from './component/left-side';
 import Rank from '../../container/rank/index';
 import Song from '../../container/song/index';
-import LeftSide from '../../component/left-side';
-import './style.pcss';
-import {curSongInfoType, songTrack} from '../../types/index';
 import Detail from '../../container/detail';
+import Recommend from '../../container/recommend/index';
+import {curSongInfoType, songTrack} from '../../types/index';
 import {currentTime, currentTimeContext} from '../../plugin/currentTimeContext';
+import './style.pcss';
 interface Props {
   playTracks: Array<songTrack>,
   curSongInfo: curSongInfoType,
