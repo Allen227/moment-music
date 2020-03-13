@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import './style.pcss';
-import {songTrack, curSongInfoType} from '../../types/index';
-import parseTime from '../../plugin/parseTime';
+import {songTrack, curSongInfoType} from '../../../../types/index';
+import parseTime from '../../../../plugin/parseTime';
 import { Scrollbars } from 'react-custom-scrollbars';
-import SvgIcon from '../../component/svg-icon';
+import SvgIcon from '../../../../component/svg-icon';
 import {message} from 'antd';
 import {useHistory} from 'react-router-dom';
 interface Props {
@@ -13,12 +13,14 @@ interface Props {
   setSource: Function,
   setStatus: Function,
   fetchSongUrl: Function,
-  customStyle: object
+  customStyle: object,
+  playTracks: Array<songTrack>,
+  deleteTrack: Function
 }
 
-function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus, playMusic, customStyle}: Props) {
+function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSource, setStatus, playMusic, customStyle, playTracks}: Props) {
   const historyList = localStorage.getItem('songTracks');
-  let trackList;
+  let trackListDom;
   const history = useHistory();
   /**
    * play current song
@@ -45,11 +47,12 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
   }
   // get tracks node when historyList is valid
   if (historyList) {
-    trackList = JSON.parse(historyList).map((track: songTrack) => {
+    trackListDom = playTracks.map((track: songTrack, index: number) => {
       return (
         <li className="list-item" key={track.id} onClick={() => {playCurSong(track)}}>
           <span className="song-name text-overflow">{track.name}</span>
           <span className="song-time">{parseTime(track.dt)}</span>
+          <SvgIcon href="iconlajitong" event={() => {deleteTrack(index)}}/>
         </li>
       )
     })
@@ -77,7 +80,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
       <div className="track-container" style={playListStyle}>
         <Scrollbars style={{ width: '100%', height: '100%' }} autoHide>
           <ul className="track-list">
-            {trackList}
+            {trackListDom}
           </ul>
         </Scrollbars>
       </div>
@@ -86,7 +89,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
         <img className="music-img" src={curSongInfo.picUrl} alt="song-cover"></img>
         <div className="music-info">
           <h3 className="music-title text-overflow">{curSongInfo.name}</h3>
-          <span className="music-time">{curSongInfo.player}&nbsp;&nbsp;&nbsp;{parseTime(curSongInfo.dt)}</span>
+          <span className="music-time" style={customStyle}>{curSongInfo.player}&nbsp;&nbsp;&nbsp;{parseTime(curSongInfo.dt)}</span>
         </div>
       </div>
     </aside>

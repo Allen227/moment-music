@@ -19,9 +19,10 @@ interface Props {
   setSource: Function,
   setStatus: Function,
   fetchSongUrl: Function,
-  fetchLyric: Function
+  fetchLyric: Function,
+  deleteTrack: Function
 }
-export default function Home({setStatus, curSongInfo, stopMusic, playMusic, playTracks, loadSource, setSource, fetchSongUrl, fetchLyric}: Props) {
+export default function Home({setStatus, curSongInfo, stopMusic, playMusic, playTracks, loadSource, setSource, fetchSongUrl, fetchLyric, deleteTrack}: Props) {
   const [time, setTime] = useState(currentTime);
   function updateCurrentTime (time: any) {
     setTime(time);
@@ -50,7 +51,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
       <div className="home">
         <AppHeader customStyle={invalidStyle}/>
         <main className="app-main" style={invalidStyle}>
-          <LeftSide customStyle={invalidStyle} curSongInfo={curSongInfo} playMusic={playMusic} loadSource={loadSource} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></LeftSide>
+          <LeftSide deleteTrack={deleteTrack} playTracks={playTracks} customStyle={invalidStyle} curSongInfo={curSongInfo} playMusic={playMusic} loadSource={loadSource} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></LeftSide>
             <article className="container" style={invalidStyle}>
               <Switch>
                 <Redirect from="/" exact to="/recommend" />

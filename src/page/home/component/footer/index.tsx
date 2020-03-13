@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 import './style.pcss';
-import SvgIcon from '../svg-icon';
-import {curSongInfoType, songTrack} from '../../types/index';
+import SvgIcon from '../../../../component/svg-icon';
+import {curSongInfoType, songTrack} from '../../../../types/index';
 import { Slider } from 'antd';
-import {audioPlayer, parseTime} from '../../plugin/index';
-import {currentTimeContext} from '../../plugin/currentTimeContext';
+import {audioPlayer, parseTime} from '../../../../plugin/index';
+import {currentTimeContext} from '../../../../plugin/currentTimeContext';
 
 interface Props {
   status: boolean,

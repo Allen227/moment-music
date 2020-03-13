@@ -63,6 +63,10 @@ export type LOAD_SOURCE = typeof MUSIC_PLAYER.LOAD_SOURCE;
 export type SET_LOOP = typeof MUSIC_PLAYER.SET_LOOP;
 export type SET_PLAY_INDEX = typeof MUSIC_PLAYER.SET_PLAY_INDEX;
 export type SET_STATUS = typeof MUSIC_PLAYER.SET_STATUS;
-// play tracks
+// PUSH SONG INTO TRACKS
 export const PUSH_TRACKS = 'PUSH_TRACKS'
 export type PUSH_TRACKS = typeof PUSH_TRACKS;
+
+// DELETE SONG IN TRACKS
+export const DELETE_TRACKS = 'DELETE_TRACKS'
+export type DELETE_TRACKS = typeof DELETE_TRACKS;

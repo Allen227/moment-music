@@ -8,6 +8,14 @@ const pushPlayTracks = function (track: songTrack) {
   }
 }
 
+const deleteInTracks = function (index: number) {
+  return {
+    type: actionTypes.DELETE_TRACKS,
+    payload: index
+  }
+}
+
 export {
-  pushPlayTracks
+  pushPlayTracks,
+  deleteInTracks
 }
