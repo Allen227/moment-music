@@ -1,6 +1,6 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
-import {lyricType} from '../../types/index';
+import {lyricType, curSongInfoType} from '../../types/index';
 import parseTime from '../../plugin/parseTime';
 import {currentTimeContext} from '../../plugin/currentTimeContext';
 import './style.pcss';
@@ -10,7 +10,7 @@ interface locationType {
 }
 
 interface Props {
-  curSongInfo: any,
+  curSongInfo: curSongInfoType,
   currentTime: number,
   fetchLyric: Function,
   lyricData: any
@@ -19,7 +19,7 @@ interface Props {
 let parsedResult: any = [];
 // get current line that is active of lyric
 const getActiveIndex = (function () {
-  let preIndex = 0;
+  let preIndex = -1;
   return function getActiveIndex (searchTime: string) {
     let index = 0;
     let resultIndex: number | undefined = void 0;
@@ -39,15 +39,27 @@ const getActiveIndex = (function () {
   }
 })();
 
-export default function Song ({fetchLyric, lyricData}: Props) {
+export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
   let location: locationType = useLocation();
   let timeContext = useContext(currentTimeContext);
+  const [currentLine, setCurrentLine] = useState(0);
   const songId = location.state.id;
+  // set lyrics animation that move upward
+  useEffect(() => {
+    let lyricListDom: any = document.querySelector('.lyric-list');
+    if (lyricListDom && currentLine > 7) {
+      lyricListDom.style.top = `-${(currentLine - 7) * 30}px`;
+    }
+  }, [currentLine])
   // fetch lyric
   /* eslint-disable */
   useEffect(() => {
     fetchLyric(songId);
   }, []);
+  // init currentLine when song change
+  useEffect(() => {
+    setCurrentLine(0);
+  }, [curSongInfo.id])
   // initial parsedResult
   useEffect(() => {
     parsedResult = [];
@@ -74,10 +86,16 @@ export default function Song ({fetchLyric, lyricData}: Props) {
       return parsedResult;
     })();
   });
+  let computedCurLine;
   // get node of lyric
   let lyricDom = parsedResult.map((line: lyricType, index: number) => {
     const lyricStyle = ['lyric-line'];
-    if (getActiveIndex(parseTime(timeContext.value * 1e3)) === index) {
+    computedCurLine = getActiveIndex(parseTime(timeContext.value * 1e3));
+    // set new current line if not find current line
+    if (computedCurLine !== currentLine) {
+      setCurrentLine(computedCurLine);
+    }
+    if (currentLine === index) {
       lyricStyle.push('active');
     }
     return (
@@ -85,7 +103,7 @@ export default function Song ({fetchLyric, lyricData}: Props) {
     )
   })
   return (
-    <div>
+    <div className="song">
       <ul className="lyric-list">{lyricDom}</ul>
     </div>
   )

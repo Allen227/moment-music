@@ -1,13 +1,13 @@
 import * as React from 'react';
 import './style.pcss';
-import {songTrack, curSongInfo} from '../../types/index';
+import {songTrack, curSongInfoType} from '../../types/index';
 import parseTime from '../../plugin/parseTime';
 import { Scrollbars } from 'react-custom-scrollbars';
 import SvgIcon from '../../component/svg-icon';
 import {message} from 'antd';
 import {useHistory} from 'react-router-dom';
 interface Props {
-  curSongInfo: curSongInfo,
+  curSongInfo: curSongInfoType,
   playMusic: Function,
   loadSource: Function,
   setSource: Function,

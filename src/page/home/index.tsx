@@ -7,13 +7,12 @@ import Rank from '../../container/rank/index';
 import Song from '../../container/song/index';
 import LeftSide from '../../component/left-side';
 import './style.pcss';
-import {curSongInfo, songTrack} from '../../types/index';
+import {curSongInfoType, songTrack} from '../../types/index';
 import Detail from '../../container/detail';
 import {currentTime, currentTimeContext} from '../../plugin/currentTimeContext';
-import { NONAME } from 'dns';
 interface Props {
   playTracks: Array<songTrack>,
-  curSongInfo: curSongInfo,
+  curSongInfo: curSongInfoType,
   playMusic: Function,
   stopMusic: Function,
   loadSource: Function,

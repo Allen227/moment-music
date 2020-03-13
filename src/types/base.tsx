@@ -12,6 +12,6 @@ export interface songTrack {
   dt: number
 }
 
-export interface curSongInfo extends songTrack {
+export interface curSongInfoType extends songTrack {
   status: boolean
 }

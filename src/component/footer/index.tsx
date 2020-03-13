@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react';
 import './style.pcss';
 import SvgIcon from '../svg-icon';
-import {curSongInfo, songTrack} from '../../types/index';
+import {curSongInfoType, songTrack} from '../../types/index';
 import { Slider } from 'antd';
 import {audioPlayer, parseTime} from '../../plugin/index';
 import {currentTimeContext} from '../../plugin/currentTimeContext';
 
 interface Props {
   status: boolean,
-  curSongInfo: curSongInfo,
+  curSongInfo: curSongInfoType,
   playTracks: Array<songTrack>,
   stopMusic: Function,
   playMusic: Function,
