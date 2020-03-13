@@ -12,10 +12,11 @@ interface Props {
   loadSource: Function,
   setSource: Function,
   setStatus: Function,
-  fetchSongUrl: Function
+  fetchSongUrl: Function,
+  customStyle: object
 }
 
-function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus, playMusic}: Props) {
+function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus, playMusic, customStyle}: Props) {
   const historyList = localStorage.getItem('songTracks');
   let trackList;
   const history = useHistory();
@@ -71,8 +72,8 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
     })
   }
   return (
-    <aside className="left-side">
-      <h2 className="title">播放列表</h2>
+    <aside className="left-side" style={customStyle}>
+      <h2 className="title" style={customStyle}>播放列表</h2>
       <div className="track-container" style={playListStyle}>
         <Scrollbars style={{ width: '100%', height: '100%' }} autoHide>
           <ul className="track-list">
@@ -80,7 +81,7 @@ function LeftSide ({curSongInfo, fetchSongUrl, loadSource, setSource, setStatus,
           </ul>
         </Scrollbars>
       </div>
-      <div className={curSongBoxClass.join(' ')}>
+      <div className={curSongBoxClass.join(' ')} style={customStyle}>
         <SvgIcon href="iconfangda" event={jumpSongPage}/>
         <img className="music-img" src={curSongInfo.picUrl} alt="song-cover"></img>
         <div className="music-info">

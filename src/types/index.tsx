@@ -2,7 +2,7 @@ import {requestActionType, songTrack, curSongInfo} from './base';
 import {TagsType, recommendTagsType, detailType, recommendTagDetailType} from './recommend';
 import {playlistType, playlistDetailType, songUrlType} from './playlist';
 import {rankListType, rankItemType} from './rank';
-import {wordType} from './song';
+import {lyricType} from './song';
 
 export {
   songTrack,
@@ -17,5 +17,5 @@ export {
   curSongInfo,
   rankItemType,
   rankListType,
-  wordType
+  lyricType
 }

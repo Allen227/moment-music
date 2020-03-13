@@ -5,7 +5,7 @@ export interface songWordType {
   }
 }
 
-export interface wordType {
+export interface lyricType {
   time: string,
   value: string
 }

@@ -15,10 +15,11 @@ interface Props {
   setSource: Function,
   setStatus: Function,
   fetchSongUrl: Function,
-  fetchLyric: Function
+  fetchLyric: Function,
+  customStyle: object
 }
 
-function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, fetchSongUrl, setSource, fetchLyric}: Props) {
+function AppHeader ({customStyle, setStatus, status, stopMusic, playMusic, curSongInfo, playTracks, fetchSongUrl, setSource, fetchLyric}: Props) {
   const audio = audioPlayer.getInstance();
   let statusClass = ['play-icon'];
   if (status) {
@@ -128,7 +129,7 @@ function AppHeader ({setStatus, status, stopMusic, playMusic, curSongInfo, playT
   }
 
   return (
-    <footer className="app-footer">
+    <footer className="app-footer" style={customStyle}>
       <div className="footer-bg"></div>
       <div className="footer-container">
         <div className="player-control">

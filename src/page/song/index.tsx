@@ -1,6 +1,6 @@
 import React, {useEffect, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
-import {wordType} from '../../types/index';
+import {lyricType} from '../../types/index';
 import parseTime from '../../plugin/parseTime';
 import {currentTimeContext} from '../../plugin/currentTimeContext';
 import './style.pcss';
@@ -39,7 +39,7 @@ const getActiveIndex = (function () {
   }
 })();
 
-export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
+export default function Song ({fetchLyric, lyricData}: Props) {
   let location: locationType = useLocation();
   let timeContext = useContext(currentTimeContext);
   const songId = location.state.id;
@@ -75,18 +75,18 @@ export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
     })();
   });
   // get node of lyric
-  let lyricDom = parsedResult.map((word: wordType, index: number) => {
-    const lyricStyle = ['word-item'];
+  let lyricDom = parsedResult.map((line: lyricType, index: number) => {
+    const lyricStyle = ['lyric-line'];
     if (getActiveIndex(parseTime(timeContext.value * 1e3)) === index) {
       lyricStyle.push('active');
     }
     return (
-      <li className={lyricStyle.join(' ')} key={index}>{word.value}</li>
+      <li className={lyricStyle.join(' ')} key={index}>{line.value}</li>
     )
   })
   return (
     <div>
-      <ul className="word-list">{lyricDom}</ul>
+      <ul className="lyric-list">{lyricDom}</ul>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import AppHeader from '../../component/header';
 import AppFooter from '../../component/footer';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch, Redirect, useRouteMatch} from 'react-router-dom';
 import Recommend from '../../container/recommend/index';
 import Rank from '../../container/rank/index';
 import Song from '../../container/song/index';
@@ -10,6 +10,7 @@ import './style.pcss';
 import {curSongInfo, songTrack} from '../../types/index';
 import Detail from '../../container/detail';
 import {currentTime, currentTimeContext} from '../../plugin/currentTimeContext';
+import { NONAME } from 'dns';
 interface Props {
   playTracks: Array<songTrack>,
   curSongInfo: curSongInfo,
@@ -30,13 +31,28 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
     value: time,
     update: updateCurrentTime
   }
+  // set style on song page
+  const isSongRouter = !!useRouteMatch('/song');
+  let homeBgStyle = {};
+  let invalidStyle = {};
+  if (isSongRouter) {
+    homeBgStyle = {
+      backgroundImage: `url(${curSongInfo.picUrl}?param=${document.body.offsetWidth}y${document.body.offsetHeight})`
+    };
+    invalidStyle = {
+      background: 'none',
+      border: 'none',
+      color: 'white'
+    };
+  }
   return (
     <currentTimeContext.Provider value={currentTimeBus}>
+      <div className="home-bg" style={homeBgStyle}></div>
       <div className="home">
-        <AppHeader></AppHeader>
-        <main className="app-main">
-          <LeftSide curSongInfo={curSongInfo} playMusic={playMusic} loadSource={loadSource} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></LeftSide>
-            <article className="container">
+        <AppHeader customStyle={invalidStyle}/>
+        <main className="app-main" style={invalidStyle}>
+          <LeftSide customStyle={invalidStyle} curSongInfo={curSongInfo} playMusic={playMusic} loadSource={loadSource} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></LeftSide>
+            <article className="container" style={invalidStyle}>
               <Switch>
                 <Redirect from="/" exact to="/recommend" />
                 <Route path="/recommend" component={Recommend} exact></Route>
@@ -47,7 +63,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
               </Switch>
             </article>
         </main>
-        <AppFooter status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl} fetchLyric={fetchLyric}></AppFooter>
+        <AppFooter customStyle={invalidStyle} status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl} fetchLyric={fetchLyric}></AppFooter>
       </div>
     </currentTimeContext.Provider>
   )
