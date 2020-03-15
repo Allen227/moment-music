@@ -70,7 +70,7 @@ export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongU
     })
     topInfo = (
       <div className="playlist-top">
-        <img className="playlist-cover" src={playList.coverImgUrl} alt="playlist cover"></img>
+        <img className="playlist-cover" src={`${playList.coverImgUrl}?param=200y200`} alt="playlist cover"></img>
         <div className="playlist-info">
           <h2 className="playlist-title">{playList.name}</h2>
           <p className="playlist-desc">{playList.description}</p>

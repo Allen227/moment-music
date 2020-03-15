@@ -86,7 +86,7 @@ function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSourc
       </div>
       <div className={curSongBoxClass.join(' ')} style={customStyle}>
         <SvgIcon href="iconfangda" event={jumpSongPage}/>
-        <img className="music-img" src={curSongInfo.picUrl} alt="song-cover"></img>
+        <img className="music-img" src={`${curSongInfo.picUrl}?param=60y60`} alt="song-cover"></img>
         <div className="music-info">
           <h3 className="music-title text-overflow">{curSongInfo.name}</h3>
           <span className="music-time" style={customStyle}>{curSongInfo.player}&nbsp;&nbsp;&nbsp;{parseTime(curSongInfo.dt)}</span>

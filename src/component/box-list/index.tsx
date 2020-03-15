@@ -35,7 +35,7 @@ export default function BoxList({recommendList, rankList, type}: Props) {
     return (
       <li className="box-item" key={item.id} onClick={() => jumpDetail(item.id)}>
         <div className="img-box">
-          <img className="img" src={item.coverImgUrl} alt="box-cover"/>
+          <img className="img" src={`${item.coverImgUrl}?param=200y200`} alt="box-cover"/>
         </div>
         <div className="box-title">{item.name}</div>
       </li>

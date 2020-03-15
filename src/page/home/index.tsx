@@ -37,7 +37,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
   let invalidStyle = {};
   if (isSongRouter) {
     homeBgStyle = {
-      backgroundImage: `url(${curSongInfo.picUrl}?param=${document.body.offsetWidth}y${document.body.offsetHeight})`
+      backgroundImage: `url(${curSongInfo.picUrl}?param=${document.body.offsetWidth / 3.9}y${document.body.offsetHeight / 3.9})`
     };
     invalidStyle = {
       background: 'none',
