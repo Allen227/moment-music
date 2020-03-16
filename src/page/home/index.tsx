@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Route, Switch, Redirect, useRouteMatch} from 'react-router-dom';
 import AppHeader from './component/header';
 import AppFooter from './component/footer';
@@ -24,6 +24,8 @@ interface Props {
 }
 export default function Home({setStatus, curSongInfo, stopMusic, playMusic, playTracks, loadSource, setSource, fetchSongUrl, fetchLyric, deleteTrack}: Props) {
   const [time, setTime] = useState(currentTime);
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
   function updateCurrentTime (time: any) {
     setTime(time);
   }
@@ -31,13 +33,17 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
     value: time,
     update: updateCurrentTime
   }
-  // set style on song page
-  const isSongRouter = !!useRouteMatch('/song');
   let homeBgStyle = {};
   let invalidStyle = {};
-  if (isSongRouter) {
+  const isSongRouter = !!useRouteMatch('/song');
+  useEffect(() => {
+    setScreenWidth(document.body.offsetWidth / 3.9);
+    setScreenHeight(document.body.offsetHeight / 3.9);
+  }, []);
+  // set style on song page
+  if (isSongRouter && screenWidth && screenHeight) {
     homeBgStyle = {
-      backgroundImage: `url(${curSongInfo.picUrl}?param=${document.body.offsetWidth / 3.9}y${document.body.offsetHeight / 3.9})`
+      backgroundImage: `url(${curSongInfo.picUrl}?param=${screenWidth}y${screenHeight})`
     };
     invalidStyle = {
       background: 'none',
@@ -47,7 +53,8 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
   }
   return (
     <currentTimeContext.Provider value={currentTimeBus}>
-      <div className="home-bg" style={homeBgStyle}></div>
+      <div className="mask home-bg" style={homeBgStyle}></div>
+      <div className="mask home-fg"></div>
       <div className="home">
         <AppHeader customStyle={invalidStyle}/>
         <main className="app-main" style={invalidStyle}>

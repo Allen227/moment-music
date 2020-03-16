@@ -15,7 +15,7 @@ function curSongInfo (state: object = {}, action: any) {
       if (!audio.src && localSongInfo) {
         audio.src = parsedSongInfo.source;
       }
-      audio.play();
+      audio.play().catch(() => {});
       return Object.assign({}, state, {status: action.payload});
     case actionTypes.MUSIC_PLAYER.STOP_MUSIC:
       audio.pause();

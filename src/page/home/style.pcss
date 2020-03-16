@@ -1,19 +1,23 @@
-.home-bg {
+.mask {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
   width: 100%;
   height: 100%;
+  transition: all 0.25s ease;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  transition: all 0.25s ease;
+}
+.home-bg {
+  z-index: -2;
+}
+.home-fg {
+  background: black;
+  opacity: 0.5;
+  z-index: -1;
 }
 .home {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
   .app-main {
     background: var(--mainBgColor);
     display: flex;

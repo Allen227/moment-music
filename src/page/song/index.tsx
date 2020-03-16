@@ -61,7 +61,7 @@ export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
     let lyricListDom: any = document.querySelector('.lyric-list');
     setCurrentLine(0);
     lyricListDom.removeAttribute('style');
-  }, [curSongInfo.id])
+  }, [curSongInfo])
   // initial parsedResult
   useEffect(() => {
     parsedResult = [];

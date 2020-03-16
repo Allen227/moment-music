@@ -56,18 +56,28 @@ function AppHeader ({customStyle, setStatus, status, stopMusic, playMusic, curSo
   useEffect(() => {
     fetchLyric(curSongInfo.id);
   }, [curSongInfo.id]);
+
+  async function startMusic (willPlaySong: songTrack | undefined, curPlayTime: number) {
+    if (willPlaySong) {
+      const songUrlData = await fetchSongUrl(willPlaySong.id);
+      // update new source
+      willPlaySong.source = songUrlData.data[0].url;
+      setSource(willPlaySong);
+      if (curPlayTime) {
+        slideTimeEnd(curPlayTime);
+      }
+      playMusic();
+      setStatus(true);
+    }
+  }
   /**
    * control player
    */
-  async function switchPlayer () {
+   function switchPlayer () {
     if (status) {
       stopMusic();
     } else {
-      const songUrlData = await fetchSongUrl(curSongInfo.id);
-      curSongInfo.source = songUrlData.data[0].url;
-      setSource(curSongInfo);
-      slideTimeEnd(curPlayTime);
-      playMusic();
+      startMusic(curSongInfo, curPlayTime);
     }
   }
   /**
@@ -80,30 +90,30 @@ function AppHeader ({customStyle, setStatus, status, stopMusic, playMusic, curSo
    * play pre song
    * @param curSongIdx current index of song
    */
-  function playPreSong (curSongIdx: number) {
+  function getPreSongInfo (curSongIdx: number) {
     if (curSongIdx > 0) {
-      setSource(playTracks[curSongIdx - 1]);
+      return playTracks[curSongIdx - 1];
     }
   }
   /**
    * play next song
    * @param curSongIdx current index of song
    */
-  function playNextSong (curSongIdx: number) {
+  function getNextSongInfo (curSongIdx: number) {
     if (curSongIdx < playTracks.length - 1) {
-      setSource(playTracks[curSongIdx + 1]);
+      return playTracks[curSongIdx + 1];
     }
   }
   // control previous or next
   function controlPreOrNext (type: number) {
     let curSongIdx = getCurrentSongIndex();
+    let willPlaySong: songTrack | undefined ;
     if (type === -1) {
-      playPreSong(curSongIdx)
+      willPlaySong = getPreSongInfo(curSongIdx)
     } else if (type === 1) {
-      playNextSong(curSongIdx);
+      willPlaySong = getNextSongInfo(curSongIdx);
     }
-    playMusic();
-    setStatus(true);
+    startMusic(willPlaySong, 0)
   }
   /**
    * set value that is slide bar of time
