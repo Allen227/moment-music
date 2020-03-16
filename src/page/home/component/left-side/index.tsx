@@ -4,7 +4,6 @@ import {songTrack, curSongInfoType} from '../../../../types/index';
 import parseTime from '../../../../plugin/parseTime';
 import { Scrollbars } from 'react-custom-scrollbars';
 import SvgIcon from '../../../../component/svg-icon';
-import {message} from 'antd';
 import {useHistory} from 'react-router-dom';
 interface Props {
   curSongInfo: curSongInfoType,
@@ -27,13 +26,13 @@ function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSourc
    * @param track the song information that will play
    */
   async function playCurSong (track: any) {
-    const songUrlData = await fetchSongUrl(track.id);
-    if (!!songUrlData.data[0].url) {
+    const songUrl = await fetchSongUrl(track.id);
+    if (!!songUrl) {
       const songInfo = {
         id: track.id,
         name: track.name,
         picUrl: track.picUrl,
-        source: songUrlData.data[0].url,
+        source: songUrl,
         player: track.player,
         dt: track.dt
       };
@@ -41,8 +40,6 @@ function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSourc
       loadSource();
       playMusic();
       setStatus(true);
-    } else {
-      message.warn('歌曲不存在');
     }
   }
   /**

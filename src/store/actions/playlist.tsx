@@ -2,6 +2,7 @@ import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
 import * as actions from '../../const';
 import server from '../../server/api';
+import {message} from 'antd';
 import {requestActionType, playlistDetailType} from '../../types/index';
 
 const fetchPlaylistDetailSuccess = (payload: playlistDetailType): requestActionType => {
@@ -27,7 +28,12 @@ const fetchPlaylistDetail = (playlistId: number): ThunkAction<void, null, null, 
 }
 
 const fetchSongUrl = async (songId: number) => {
-    return await server.fetch_song_url(songId);
+  const songUrlData: any = await server.fetch_song_url(songId);
+  const songUrl = songUrlData.data[0].url;
+  if (!songUrl) {
+    message.warn('由于版权问题, 该歌曲暂时下架！');
+  }
+  return songUrl;
 }
 
 export {

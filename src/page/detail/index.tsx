@@ -36,13 +36,13 @@ export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongU
   let songslist;
 
   async function playSong (track: any) {
-    const songUrlData = await fetchSongUrl(track.id);
-    if (!!songUrlData.data[0].url) {
+    const songUrl = await fetchSongUrl(track.id);
+    if (!!songUrl) {
       const songInfo = {
         id: track.id,
         name: track.name,
         picUrl: track.al.picUrl,
-        source: songUrlData.data[0].url,
+        source: songUrl,
         player: track.ar[0].name,
         dt: track.dt
       };
@@ -51,8 +51,6 @@ export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongU
       playMusic();
       pushPlayTracks(songInfo);
       setStatus(true);
-    } else {
-      message.warn('歌曲不存在');
     }
   }
 
