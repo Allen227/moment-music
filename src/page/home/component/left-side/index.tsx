@@ -45,6 +45,13 @@ function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSourc
       message.warn('歌曲不存在');
     }
   }
+  /**
+   * delete item in history list
+   * @param index delete index
+   */
+  function deleteTrackItem (index: number) {
+    deleteTrack(index);
+  }
   // get tracks node when historyList is valid
   if (historyList) {
     trackListDom = playTracks.map((track: songTrack, index: number) => {
@@ -52,7 +59,7 @@ function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSourc
         <li className="list-item" key={track.id} onClick={() => {playCurSong(track)}}>
           <span className="song-name text-overflow">{track.name}</span>
           <span className="song-time">{parseTime(track.dt)}</span>
-          <SvgIcon href="iconlajitong" event={() => {deleteTrack(index)}}/>
+          <SvgIcon href="iconlajitong" event={() => {deleteTrackItem(index)}}/>
         </li>
       )
     })
