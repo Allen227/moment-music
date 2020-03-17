@@ -54,14 +54,16 @@ function AppHeader ({customStyle, setStatus, status, stopMusic, playMusic, curSo
   }, [])
   /* eslint-disable */
   useEffect(() => {
-    fetchLyric(curSongInfo.id);
+    if (curSongInfo && curSongInfo.id) {
+      fetchLyric(curSongInfo.id);
+    }
   }, [curSongInfo.id]);
 
   async function startMusic (willPlaySong: songTrack | undefined, curPlayTime: number) {
     if (willPlaySong) {
-      const songUrlData = await fetchSongUrl(willPlaySong.id);
+      const songUrl = await fetchSongUrl(willPlaySong.id);
       // update new source
-      willPlaySong.source = songUrlData.data[0].url;
+      willPlaySong.source = songUrl;
       setSource(willPlaySong);
       if (curPlayTime) {
         slideTimeEnd(curPlayTime);

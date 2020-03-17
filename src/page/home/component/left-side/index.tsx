@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './style.pcss';
 import {songTrack, curSongInfoType} from '../../../../types/index';
 import parseTime from '../../../../plugin/parseTime';

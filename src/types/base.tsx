@@ -1,6 +1,6 @@
 export interface requestActionType {
   type: string,
-  payload: object
+  payload: object | undefined
 }
 
 export interface songTrack {

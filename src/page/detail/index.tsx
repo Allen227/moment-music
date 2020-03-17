@@ -4,7 +4,7 @@ import {playlistDetailType, songUrlType} from '../../types/index';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
 import parseTime from '../../plugin/parseTime';
-import { message } from 'antd';
+import ContentLoader from "react-content-loader" 
 
 interface Props {
   playlistDetail: playlistDetailType,
@@ -27,6 +27,7 @@ interface locationType {
 export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongUrl, playMusic, loadSource, setSource, setLoop, pushPlayTracks, setStatus}: Props) {
   let location: locationType = useLocation();
   let playlistId: number = location.state.id;
+  let contentDom;
   /* eslint-disable */
   useEffect(() => {
     fetchPlaylistDetail(playlistId);
@@ -53,7 +54,23 @@ export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongU
       setStatus(true);
     }
   }
-
+  contentDom = (
+    <ContentLoader 
+      speed={0}
+      width={935}
+      height={475}
+      viewBox="0 0 935 475"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
+    >
+      <rect x="0" y="0" rx="0" ry="0" width="150" height="150" /> 
+      <rect x="175" y="30" rx="0" ry="0" width="500" height="20" /> 
+      <rect x="175" y="70" rx="0" ry="0" width="600" height="20" /> 
+      <rect x="175" y="110" rx="0" ry="0" width="700" height="20" /> 
+      <rect x="0" y="197" rx="0" ry="0" width="900" height="300" /> 
+      <rect x="662" y="417" rx="0" ry="0" width="60" height="0" />
+    </ContentLoader>
+  )
   if (playlistDetail.playlist) {
     let playList = playlistDetail.playlist;
     songslist = playList.tracks.map((track, idx) => {
@@ -75,9 +92,7 @@ export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongU
         </div>
       </div>
     );
-  }
-  return (
-    <div className="playlist-detail">
+    contentDom = (
       <Scrollbars style={{ width: '100%', height: '100%' }} autoHide>
         {topInfo}
         <div className="table-wrapper">
@@ -92,6 +107,11 @@ export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongU
           </div>
         </div>
       </Scrollbars>
+    )
+  }
+  return (
+    <div className="playlist-detail">
+      {contentDom}
     </div>
   )
 }

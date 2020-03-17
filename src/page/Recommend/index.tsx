@@ -13,6 +13,7 @@ interface Props {
 export default function Recommend({recommendTags, recommendTagDetail, fetchRemmendTags, fetchRecommendDetail}: Props) {
   let [activeTag, setActiveTag] = useState('华语');
   let recommendBox;
+  let BoxListDom;
 
   /* eslint-disable */
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
    * @param selectedTag select information of tag
    */
   function selectTag (selectedTag: TagsType) {
+    recommendTagDetail.playlists = [];
     setActiveTag(selectedTag.name);
     fetchRecommendDetail(selectedTag.name);
   }
@@ -45,17 +47,14 @@ export default function Recommend({recommendTags, recommendTagDetail, fetchRemme
     })
   }
   // set node of recommend list
-  let BoxListDom;
-  if (Object.keys(recommendTagDetail).length > 0) {
-    BoxListDom = (
+  BoxListDom = (
       <BoxList recommendList={recommendTagDetail.playlists} type="recommend"/>
     )
-  }
   return (
     <div className="recommend">
-        <ul className="tags-list">
-          {recommendBox}
-        </ul>
+      <ul className="tags-list">
+        {recommendBox}
+      </ul>
       {BoxListDom}
     </div>
   )

@@ -5,6 +5,13 @@ import server from '../../server/api';
 import {message} from 'antd';
 import {requestActionType, playlistDetailType} from '../../types/index';
 
+const fetchPlaylistDetailStart = (payload: undefined): requestActionType => {
+  return {
+    type: actions.FETCH_PLAYLIST_DETAIL.START,
+    payload
+  }
+};
+
 const fetchPlaylistDetailSuccess = (payload: playlistDetailType): requestActionType => {
   return {
     type: actions.FETCH_PLAYLIST_DETAIL.SUCCESS,
@@ -19,6 +26,7 @@ const fetchPlaylistDetailError = (payload: object): requestActionType => ({
 
 const fetchPlaylistDetail = (playlistId: number): ThunkAction<void, null, null, Action<string>> => {
   return dispatch => {
+    dispatch(fetchPlaylistDetailStart(void 0));
     server.fetch_playlist_detail(playlistId).then((res: object) => {
       dispatch(fetchPlaylistDetailSuccess(res as playlistDetailType));
     }).catch(err => {

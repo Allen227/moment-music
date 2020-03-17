@@ -2,7 +2,6 @@ import {connect} from 'react-redux';
 import Detail from '../../page/detail/index';
 import * as actions from '../../store/actions';
 import {songTrack} from '../../types/index';
-import {message} from 'antd';
 
 function mapStateToProps (state: object) {
   return state;

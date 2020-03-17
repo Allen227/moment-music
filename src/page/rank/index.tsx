@@ -15,12 +15,9 @@ export default function Recommend({fetchRankList, rankList}: Props) {
     fetchRankList();
   }, []);
   // set node of rank list
-  let rankDom;
-  if (rankList && rankList.list) {
-    rankDom = (
+  let rankDom = (
       <BoxList rankList={rankList.list} type="rank"/>
     )
-  }
   return (
     <div className="rank">
       {rankDom}

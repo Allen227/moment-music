@@ -54,7 +54,9 @@ export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
   // fetch lyric
   /* eslint-disable */
   useEffect(() => {
-    fetchLyric(songId);
+    if (songId) {
+      fetchLyric(songId);
+    }
   }, []);
   // init currentLine when song change
   useEffect(() => {
