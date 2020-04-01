@@ -26,7 +26,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const WebpackNotifierPlugin = require('webpack-notifier');
+const WebpackNotifierPlugin = require('webpack-build-notifier');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const chalk = require('chalk');
@@ -136,20 +136,19 @@ module.exports = function(webpackEnv) {
     }
     return loaders;
   };
-  const isExternalLib = isEnvProduction ? [{
-    react: 'react',
-    antd: 'antd',
-    axios: 'axios',
-    reactRedux: 'react-redux',
-    reactContentLoader: 'react-content-loader',
-    reactCustomScrollbars: 'react-custom-scrollbars',
-    reactDom: 'react-dom',
-    reactRedux: 'react-redux',
-    reactRouterDom: 'react-router-dom',
-    reactThunk: 'redux-thunk'
+  const externalLib = isEnvProduction ? [{
+    'react': 'react',
+    'axios': 'axios',
+    'react-redux': 'reactRedux',
+    'react-content-loader': 'reactContentLoader',
+    'react-custom-scrollbars': 'reactCustomScrollbars',
+    'react-dom': 'reactDom',
+    'react-redux': 'reactRedux',
+    'react-router-dom': 'reactRouterDom',
+    'redux-thunk': 'reactThunk'
   }] : [];
 
-  return smp.wrap({
+  const webpackConfig = {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
@@ -546,7 +545,7 @@ module.exports = function(webpackEnv) {
         format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
         clear: false
       }),
-      new WebpackNotifierPlugin(),
+      isEnvProduction ? new WebpackNotifierPlugin() : void 0,
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -695,9 +694,11 @@ module.exports = function(webpackEnv) {
       tls: 'empty',
       child_process: 'empty',
     },
-    externals: isExternalLib,
+    externals: externalLib,
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
-  });
+  };
+
+  return isEnvProduction ? smp.wrap(webpackConfig) : webpackConfig;
 };
