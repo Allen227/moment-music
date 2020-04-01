@@ -1,15 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Suspense, lazy} from 'react';
 import {Route, Switch, Redirect, useRouteMatch} from 'react-router-dom';
 import AppHeader from './component/header';
 import AppFooter from './component/footer';
 import LeftSide from './component/left-side';
-import Rank from '../../container/rank/index';
-import Song from '../../container/song/index';
-import Detail from '../../container/detail';
-import Recommend from '../../container/recommend/index';
+
 import {curSongInfoType, songTrack} from '../../types/index';
 import {currentTime, currentTimeContext} from '../../plugin/currentTimeContext';
 import './style.pcss';
+
+const Rank = lazy(() => import('../../container/rank/index'));
+const Song = lazy(() => import('../../container/song/index'));
+const Detail = lazy(() => import('../../container/detail'));
+const Recommend = lazy(() => import('../../container/recommend/index'));
 interface Props {
   playTracks: Array<songTrack>,
   curSongInfo: curSongInfoType,
@@ -29,6 +31,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
   function updateCurrentTime (time: any) {
     setTime(time);
   }
+  // mounted on state for response update
   const currentTimeBus: any = {
     value: time,
     update: updateCurrentTime
@@ -60,14 +63,16 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
         <main className="app-main" style={invalidStyle}>
           <LeftSide deleteTrack={deleteTrack} playTracks={playTracks} customStyle={invalidStyle} curSongInfo={curSongInfo} playMusic={playMusic} loadSource={loadSource} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl}></LeftSide>
             <article className="container" style={invalidStyle}>
-              <Switch>
-                <Redirect from="/" exact to="/recommend" />
-                <Route path="/recommend" component={Recommend} exact></Route>
-                <Route path={`/recommend/detail`} component={Detail}></Route>
-                <Route path={`/rank/detail`} component={Detail}></Route>
-                <Route path="/rank" component={Rank} exact></Route>
-                <Route path="/song" component={Song} exact></Route>
-              </Switch>
+              <Suspense fallback={<React.Fragment></React.Fragment>}>
+                <Switch>
+                  <Redirect from="/" exact to="/recommend" />
+                  <Route path="/recommend" component={Recommend} exact></Route>
+                  <Route path={`/recommend/detail`} component={Detail}></Route>
+                  <Route path={`/rank/detail`} component={Detail}></Route>
+                  <Route path="/rank" component={Rank} exact></Route>
+                  <Route path="/song" component={Song} exact></Route>
+                </Switch>
+              </Suspense>
             </article>
         </main>
         <AppFooter customStyle={invalidStyle} status={curSongInfo.status} stopMusic={stopMusic} playMusic={playMusic} playTracks={playTracks} curSongInfo={curSongInfo} setSource={setSource} setStatus={setStatus} fetchSongUrl={fetchSongUrl} fetchLyric={fetchLyric}></AppFooter>
