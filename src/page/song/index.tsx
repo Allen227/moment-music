@@ -58,7 +58,7 @@ export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
       fetchLyric(songId);
     }
   }, []);
-  // init currentLine when song change
+  // initial currentLine when song change
   useEffect(() => {
     let lyricListDom: any = document.querySelector('.lyric-list');
     setCurrentLine(0);

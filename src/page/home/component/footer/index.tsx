@@ -57,6 +57,8 @@ function AppHeader ({customStyle, setStatus, status, stopMusic, playMusic, curSo
     if (curSongInfo && curSongInfo.id) {
       fetchLyric(curSongInfo.id);
     }
+    // initial play time when song changed
+    setPlayTime(0);
   }, [curSongInfo.id]);
 
   async function startMusic (willPlaySong: songTrack | undefined, curPlayTime: number) {
