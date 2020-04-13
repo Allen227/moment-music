@@ -22,14 +22,14 @@ const getActiveIndex = (function () {
   let preIndex = 0;
   return function getActiveIndex (searchTime: number) {
     // get active line according to timestamp range
-    let resultIndex: number | undefined = void 0;
+    let resultIndex: number = -1;
     let preLineTime: number = -1;
     let nextLineTime: number = -1;
     let lyricLength: number = parsedResult.length;
-    if (preIndex > 0) {
+    if (preIndex > 0 && parsedResult[preIndex - 1]) {
       preLineTime = convertToTimestamp(parsedResult[preIndex - 1].time);
     }
-    if (preIndex < lyricLength - 1) {
+    if (preIndex < lyricLength - 1 && parsedResult[preIndex + 1]) {
       nextLineTime = convertToTimestamp(parsedResult[preIndex + 1].time);
     }
     if ((preIndex > 0 && preIndex < lyricLength - 1)
@@ -37,10 +37,10 @@ const getActiveIndex = (function () {
       resultIndex = ++preIndex;
     } else if (preIndex === 0 && searchTime > nextLineTime) {
       resultIndex = ++preIndex;
-    } else if (preIndex >= lyricLength - 1 && searchTime > preLineTime) {
+    } else if (preIndex === lyricLength - 2 && searchTime > preLineTime) {
       resultIndex = ++preIndex;
     }
-    if (resultIndex === void 0) {
+    if (resultIndex === -1) {
       resultIndex = preIndex;
     } else {
       preIndex = resultIndex;
@@ -100,7 +100,6 @@ export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
       return parsedResult;
     })();
   });
-  console.log(parsedResult)
   let computedCurLine;
   // get node of lyric
   let lyricDom = parsedResult.map((line: lyricType, index: number) => {

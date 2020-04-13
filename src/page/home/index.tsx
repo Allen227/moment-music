@@ -29,6 +29,7 @@ export default function Home({setStatus, curSongInfo, stopMusic, playMusic, play
   const [screenWidth, setScreenWidth] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
   function updateCurrentTime (time: any) {
+    console.log(time);
     setTime(time);
   }
   // mounted on state for response update
