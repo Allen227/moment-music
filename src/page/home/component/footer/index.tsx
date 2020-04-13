@@ -3,7 +3,7 @@ import './style.pcss';
 import SvgIcon from '../../../../component/svg-icon';
 import {curSongInfoType, songTrack} from '../../../../types/index';
 import { Slider } from 'antd';
-import {audioPlayer, parseTime} from '../../../../plugin/index';
+import {audioPlayer, convertToTime} from '../../../../plugin/index';
 import {currentTimeContext} from '../../../../plugin/currentTimeContext';
 
 interface Props {
@@ -154,9 +154,9 @@ function AppHeader ({customStyle, setStatus, status, stopMusic, playMusic, curSo
           <SvgIcon href="iconxiayige" customStyle={nextSongIcon} event={() => controlPreOrNext(1)}/>
         </div>
         <div className="time-bar">
-          <span className="slide-time">{parseTime(curPlayTime * 1000)}</span>
+          <span className="slide-time">{convertToTime(curPlayTime * 1000)}</span>
           <Slider onChange={slideTime} onAfterChange={slideTimeEnd} value={curPlayTime} min={0} max={Math.round(curSongInfo.dt / 1e3)} tipFormatter={null}/>
-          <span className="slide-time">{parseTime(curSongInfo.dt)}</span>
+          <span className="slide-time">{convertToTime(curSongInfo.dt)}</span>
         </div>
         <div className="volume-bar">
           <SvgIcon href="iconyinliang" customStyle={volumeIconStyle} event={() => {}}></SvgIcon>

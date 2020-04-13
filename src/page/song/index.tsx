@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
 import {lyricType, curSongInfoType} from '../../types/index';
-import parseTime from '../../plugin/parseTime';
+import {convertToTime, convertToTimestamp} from '../../plugin';
 import {currentTimeContext} from '../../plugin/currentTimeContext';
 import './style.pcss';
 
@@ -19,16 +19,26 @@ interface Props {
 let parsedResult: any = [];
 // get current line that is active of lyric
 const getActiveIndex = (function () {
-  let preIndex = -1;
-  return function getActiveIndex (searchTime: string) {
-    let index = 0;
+  let preIndex = 0;
+  return function getActiveIndex (searchTime: number) {
+    // get active line according to timestamp range
     let resultIndex: number | undefined = void 0;
-    for (let currentLine of parsedResult) {
-      if (currentLine.time.includes(searchTime)) {
-        resultIndex = index;
-        break;
-      }
-      index++;
+    let preLineTime: number = -1;
+    let nextLineTime: number = -1;
+    let lyricLength: number = parsedResult.length;
+    if (preIndex > 0) {
+      preLineTime = convertToTimestamp(parsedResult[preIndex - 1].time);
+    }
+    if (preIndex < lyricLength - 1) {
+      nextLineTime = convertToTimestamp(parsedResult[preIndex + 1].time);
+    }
+    if ((preIndex > 0 && preIndex < lyricLength - 1)
+      && (preLineTime < searchTime && searchTime > nextLineTime)) {
+      resultIndex = ++preIndex;
+    } else if (preIndex === 0 && searchTime > nextLineTime) {
+      resultIndex = ++preIndex;
+    } else if (preIndex >= lyricLength - 1 && searchTime > preLineTime) {
+      resultIndex = ++preIndex;
     }
     if (resultIndex === void 0) {
       resultIndex = preIndex;
@@ -84,17 +94,18 @@ export default function Song ({fetchLyric, lyricData, curSongInfo}: Props) {
           parsedResult.push({
             time: matchInfo[0].slice(1, -1),
             value: line.slice(matchInfo[0].length).trim()
-          })
+          });
         }
       });
       return parsedResult;
     })();
   });
+  console.log(parsedResult)
   let computedCurLine;
   // get node of lyric
   let lyricDom = parsedResult.map((line: lyricType, index: number) => {
     const lyricStyle = ['lyric-line'];
-    computedCurLine = getActiveIndex(parseTime(timeContext.value * 1e3));
+    computedCurLine = getActiveIndex(timeContext.value * 1e3);
     // set new current line if not find current line
     if (computedCurLine !== currentLine) {
       setCurrentLine(computedCurLine);

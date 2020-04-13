@@ -1,7 +1,8 @@
 import audioPlayer from './audioPlayer';
-import parseTime from './parseTime';
+import {convertToTime, convertToTimestamp} from './parseTime';
 
 export {
   audioPlayer,
-  parseTime,
+  convertToTime,
+  convertToTimestamp,
 }

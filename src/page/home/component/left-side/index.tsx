@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.pcss';
 import {songTrack, curSongInfoType} from '../../../../types/index';
-import parseTime from '../../../../plugin/parseTime';
+import {convertToTime} from '../../../../plugin';
 import { Scrollbars } from 'react-custom-scrollbars';
 import SvgIcon from '../../../../component/svg-icon';
 import {useHistory} from 'react-router-dom';
@@ -55,7 +55,7 @@ function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSourc
       return (
         <li className="list-item" key={track.id} onClick={() => {playCurSong(track)}}>
           <span className="song-name text-overflow">{track.name}</span>
-          <span className="song-time">{parseTime(track.dt)}</span>
+          <span className="song-time">{convertToTime(track.dt)}</span>
           <SvgIcon href="iconlajitong" event={() => {deleteTrackItem(index)}}/>
         </li>
       )
@@ -93,7 +93,7 @@ function LeftSide ({deleteTrack, curSongInfo, fetchSongUrl, loadSource, setSourc
         <img className="music-img" src={`${curSongInfo.picUrl}?param=60y60`} alt="song-cover"></img>
         <div className="music-info">
           <h3 className="music-title text-overflow">{curSongInfo.name}</h3>
-          <span className="music-time" style={customStyle}>{curSongInfo.player}&nbsp;&nbsp;&nbsp;{parseTime(curSongInfo.dt)}</span>
+          <span className="music-time" style={customStyle}>{curSongInfo.player}&nbsp;&nbsp;&nbsp;{convertToTime(curSongInfo.dt)}</span>
         </div>
       </div>
     </aside>

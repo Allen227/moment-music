@@ -3,7 +3,7 @@ import {useLocation} from 'react-router-dom';
 import {playlistDetailType, songUrlType} from '../../types/index';
 import './style.pcss';
 import { Scrollbars } from 'react-custom-scrollbars';
-import parseTime from '../../plugin/parseTime';
+import {convertToTime} from '../../plugin';
 import ContentLoader from "react-content-loader" 
 
 interface Props {
@@ -79,7 +79,7 @@ export default function Detail ({fetchPlaylistDetail, playlistDetail, fetchSongU
           <span className="table-cell track-index">{idx + 1}</span>
           <span className="table-cell song-name">{track.name}</span>
           <span className="table-cell song-player">{track.ar[0].name}</span>
-          <span className="table-cell song-time">{parseTime(track.dt)}</span>
+          <span className="table-cell song-time">{convertToTime(track.dt)}</span>
         </div>
       )
     })
